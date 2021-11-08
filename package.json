@@ -1,0 +1,22 @@
+{
+  "name": "hyper-shop",
+  "version": "1.0.0",
+  "description": "shoes e-shop for sneaker-head",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dthang-one/hyper-shop.git"
+  },
+  "author": "thang - tung - nam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dthang-one/hyper-shop/issues"
+  },
+  "homepage": "https://github.com/dthang-one/hyper-shop#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
