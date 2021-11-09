@@ -25,7 +25,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  phone: string,
+  phone: {
+    type: String,
+    minlength: 10,
+    maxlength: 10
+  },
   isLock: {
     type: Boolean,
     default: 0,

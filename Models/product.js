@@ -23,19 +23,21 @@ const productSchema = new mongoose.Schema({
   description: {
     type: {
       color: String,
-      sex: Boolean,
+      sex: String,
       shoesHeight: String,
       closureType: String,
       material: String,
     },
   },
   category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category',
+    type: String,
     required: true,
   },
 
-  viewCount: Number,
+  viewCount: {
+    type: Number,
+    default: 0,
+  },
   image: String,
   images: [
     {
@@ -51,6 +53,11 @@ const productSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
+  sizes: [
+    {
+      type: Number,
+    },
+  ],
 });
 
 const Product = mongoose.model('Product', productSchema);

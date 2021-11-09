@@ -1,19 +1,22 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-  orderItems: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Product',
-      required: true,
-    },
-  ],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  status: String,
+  orderItems: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'OrderItem',
+      required: true,
+    },
+  ],
+  status: {
+    type: String,
+    default: 'Pending',
+  },
   orderedDate: {
     type: Date,
     default: Date.now,
