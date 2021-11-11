@@ -1,0 +1,122 @@
+<%- include('../includes/head.ejs') %>
+<link href="css/style.css" rel="stylesheet">
+<link href="css/custom.css" rel="stylesheet">
+</head>
+<body>
+    <%- include('../includes/subHeader')%>
+    <!-- CONTENT =============================-->
+    <section class="item content">
+        <div class="container toparea">
+            <div class="underlined-title">
+                <div class="editContent">
+                    <h1 class="text-center latestitems">Awesome Product</h1>
+                </div>
+                <div class="wow-hr type_short">
+                    <span class="wow-hr-h">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-md-6">
+                    <div class="productbox">
+                        <img src="<%= product.image %>" alt="">
+                        <div class="clearfix">
+                        </div>
+                        <br/>
+                        <div class="product-details text-left">
+                            <p>
+                                <%= product.description %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 off-set-2">
+                    <div class="big-text">
+                        <span><%=product.name%></span>
+                    </div>
+                    <div class="properties-box">
+                        <ul class="unstyle">
+                            <li><b class="propertyname">Version:</b> 1.0</li>
+                            <li><b class="propertyname">Image Size:</b> 2340x1200</li>
+                            <li><b class="propertyname">Files Included:</b> mp3, audio, jpeg, png</li>
+                            <li><b class="propertyname">Documentation:</b> Well Documented</li>
+                            <li><b class="propertyname">License:</b> GNU</li>
+                            <li><b class="propertyname">Requires:</b> Easy Digital Downloads</li>
+                            <li><b class="propertyname">Any Field Etc:</b> Any Detail</li>
+                        </ul>
+                    </div>
+                    <form class="product-size">
+                        <div class="medium-text">
+                            <span>Select size</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        7
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                    <label class="form-check-label" for="exampleRadios2">
+                                        7.5
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
+                                    <label class="form-check-label" for="exampleRadios3">
+                                        8
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                    8.5
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                    <label class="form-check-label" for="exampleRadios2">
+                                        9
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
+                                    <label class="form-check-label" for="exampleRadios3">
+                                        9.5
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <a href="#" class="btn btn-buynow">$<%=product.price%> - Add to cart</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMENT ============================= -->
+    <section class="container toparea comment-box">
+        <span class="medium-text">Product review and feedback</span>
+        <div class="divide"></div>
+        <% if (product.comments.length> 0) { %>
+            <% for (comment of product.comments){ %>
+                <!-- <span></span> -->
+                <%- include('../includes/comment', {comment:comment}) %> 
+               
+            <% } %>
+        <% } %>
+    </section>
+
+
+    <%- include('../includes/foot')%>
+
+    
+</body>
+</html>

@@ -1,17 +1,27 @@
 require('dotenv/config');
+
+const path = require('path');
+
 const mongoose = require('./db/mongoose.js');
 const express = require('express');
-const Product = require('./Models/product.js');
-const User = require('./Models/user.js');
-const Comment = require('./Models/comment.js');
-const Cart = require('./Models/cart.js');
-const Order = require('./Models/order.js');
-const OrderItems = require('./Models/orderItem.js');
+const Product = require('./models/product.js');
+const User = require('./models/user.js');
+const Comment = require('./models/comment.js');
+const Cart = require('./models/cart.js');
+const Order = require('./models/order.js');
+const OrderItems = require('./models/orderItem.js');
+
+const shopRoutes = require('./routes/shop');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 //middlewares
+app.set('view engine', 'ejs');
+app.set('views', 'Views');
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(shopRoutes);
 
 //routes
 
