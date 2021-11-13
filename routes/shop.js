@@ -14,4 +14,12 @@ router.get('/cart', shopController.getCart);
 
 router.get('/login', shopController.getLogin);
 
+router.get('/addProduct', shopController.getAddproduct);
+
+router.get('/userList', shopController.getUserList);
+
+router.get('/userDetail', shopController.getUserDetail);
+
+router.get('/userProfile', shopController.getUserProfile);
+
 module.exports = router;

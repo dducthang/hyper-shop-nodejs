@@ -157,8 +157,32 @@ exports.getCart = (req,res,next)=>{
     });
 }
 
+exports.getAddproduct = (req,res,next)=>{
+    res.render('shop/addProduct', {
+        pageTitle:'Add product',
+    });
+}
+
 exports.getLogin = (req,res,next)=>{
     res.render('auth/login', {
         pageTitle:'Login',
+    });
+}
+
+exports.getUserList = (req,res,next)=>{
+    res.render('shop/userList', {
+        pageTitle:'User list',
+    });
+}
+
+exports.getUserDetail = (req,res,next)=>{
+    res.render('shop/userDetail', {
+        pageTitle:'User Profile',
+    });
+}
+
+exports.getUserProfile = (req,res,next)=>{
+    res.render('shop/userProfile', {
+        pageTitle:'User Profile',
     });
 }

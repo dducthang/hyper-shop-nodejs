@@ -5,53 +5,23 @@
 <body>
     <%- include('../includes/subHeader')%>
 
-	<section class="tag container">
-		<!-- SEARCH BAR ======================================== -->
-		<div class="search-box">
+    <!-- CONTENT ================================ -->
+    <section class="item content container">
+        <div class="search-box">
 			<div class="container-1">
 				<span class="icon"><i class="fa fa-search"></i></span>
 				<input type="search" id="search" placeholder="Search..." />
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-3">
-				<div class="tag-box">
-					<span>FootBall</span>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="tag-box">
-					<span>BasketBall</span>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="tag-box">
-					<span>Running</span>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="tag-box">
-					<span>Casual</span>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- CONTENT =============================-->
-	<section class="item content container">
 		<div class="row justify-content-between">
 			<div class="col-md-3">
-				<%- include('../includes/filterCard')%>
-				<%- include('../includes/filterCard')%>
-				<%- include('../includes/filterCard')%>
-				<%- include('../includes/filterCard')%>
-				<%- include('../includes/filterCard')%>
-				<%- include('../includes/filterCard')%>
+				<%- include('../includes/userFilterCard')%>
 			</div>
 			<div class="col-md-9 ">
 				<div class="toparea">
 					<div class="underlined-title">
 						<div class="editContent">
-							<h1 class="text-center latestitems">OUR PRODUCTS</h1>
+							<h1 class="text-center latestitems">USER LIST</h1>
 						</div>
 						<div class="wow-hr type_short">
 							<span class="wow-hr-h">
@@ -61,13 +31,12 @@
 							</span>
 						</div>
 					</div>
-					<div class="row">
-						<% if (products.length>0){ %>
-							<% for(product of products ){ %>
-								<%-include("../includes/productBox")%>
-							<% } %>
-						<% } %>
-					</div>
+					<div class="user-list">
+                        <% for (let i=0;i<10;i++){%>
+                            <%- include('../includes/userList/userBox')%>
+                            <div class="divide"></div>
+                        <% } %>
+                    </div>
 				</div>
 				<div class="pages">
 					<p class="loadMore"><a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a></p>
@@ -88,7 +57,7 @@
 	</div>
 	
 	</section>
-	
-	<%- include('../includes/foot')%>
+
+    <%- include('../includes/foot')%>
 </body>
 </html>
