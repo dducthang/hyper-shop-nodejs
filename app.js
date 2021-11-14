@@ -14,7 +14,7 @@ const OrderItems = require('./models/orderItem.js');
 const shopRoutes = require('./routes/shop');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 //middlewares
 app.set('view engine', 'ejs');
@@ -51,6 +51,6 @@ Cart.find({}, (e, c) => {
   console.log(c);
 });
 //server;
-app.listen(port, () => {
+app.listen(process.env.PORT || 4000, () => {
   console.log('Server is running on http://localhost:3000');
 });
