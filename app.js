@@ -1,10 +1,16 @@
+const express = require('express');
+const path = require('path');
+const bodyParser = require("body-parser");
+const morgan = require('morgan');
+require('./db/mongoose.js');
 require('dotenv/config');
 
-const path = require('path');
-
-const express = require('express');
 
 const shopRoutes = require('./routes/shop');
+const productRoutes = require('./routes/product');
+const userRoutes = require('./routes/user');
+const authRoutes = require('./routes/auth');
+const orderRoutes = require('./routes/order');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -12,10 +18,15 @@ const port = process.env.PORT || 4000;
 //middlewares
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //routes
 app.use(shopRoutes);
+app.use(productRoutes);
+app.use(userRoutes);
+app.use(authRoutes);
+app.use(orderRoutes);
 
 //server;
 app.listen(process.env.PORT || 4000, () => {

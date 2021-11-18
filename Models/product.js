@@ -14,21 +14,11 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-
-  // rating: {
-  //   type: Number,
-  //   min: 0,
-  //   max: 5,
-  // },
-  description: {
-    type: {
-      color: String,
-      sex: String,
-      shoesHeight: String,
-      closureType: String,
-      material: String,
-    },
-  },
+  color: String,
+  sex: String,
+  shoesHeight: String,
+  closureType: String,
+  material: String,
   category: {
     type: String,
     required: true,
@@ -38,7 +28,11 @@ const productSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  image: String,
+  //ảnh chính
+  image: {
+    type: String,
+    required: true,
+  },
   images: [
     {
       type: String,
@@ -49,16 +43,20 @@ const productSchema = new mongoose.Schema({
     default: Date.now,
   },
   countInStock: {
-    type: Number,
+    type: [
+      {
+        size: Number,
+        quantity: Number,
+      },
+    ],
     required: true,
-    min: 0,
   },
-  sizes: [
-    {
-      type: Number,
-    },
-  ],
 });
+
+productSchema.methods.Description = function () {
+  const des = this;
+  return `Color of ${des.color}, has ${des.shoesHeight}, uses ${des.closureType}`;
+};
 
 const Product = mongoose.model('Product', productSchema);
 

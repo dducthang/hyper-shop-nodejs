@@ -15,6 +15,7 @@ const orderItemsSchema = new mongoose.Schema({
     required: true,
   },
   totalPrice: Number,
+  isOrdered: Boolean, // false: trong gio hang; true: trong don hang -> khong bi nham lan neu sau nay tinh doanh thu
 });
 
 const OrderItems = mongoose.model('OrderItems', orderItemsSchema);

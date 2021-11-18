@@ -38,7 +38,7 @@ a:hover {
 	font-size:30px;
 }
 .navbar-toggle:before {
-	background-image:url(../images/menu.png);
+	background-image:url(../img/menu.png);
 	background-repeat:no-repeat;
 }
 header .navbar-white a {
@@ -60,7 +60,7 @@ header .navbar-white {
 	box-shadow:0px 3px 2px 0px rgba(50,50,50,0.1);
 }
 .item.header {
-	background-image:url(../images/homeviewer.jpg);
+	background-image:url(../img/homeviewer.jpg);
 	background-repeat:no-repeat;
 	background-position:0% top;
 	background-size:cover;

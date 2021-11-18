@@ -1,18 +1,12 @@
 <div class="box container">
-    <form method="get" action="/shop">
+    <form method="post" action="/addProduct">
         <h1>Add Product</h1>
         <div class="content py-3">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="firstname">Product name</label>
-                        <input id="firstname" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="lastname">Detail description</label>
-                        <input id="lastname" type="text" class="form-control">
+                        <label for="productName">Product name</label>
+                        <input id="productName" name="productName" type="text" class="form-control">
                     </div>
                 </div>
             </div>
@@ -20,26 +14,30 @@
             <div class="row">
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
-                        <label for="company">Brand</label>
-                        <input id="company" type="text" class="form-control">
+                        <label for="brand">Brand</label>
+                        <input id="brand" name="brand" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
-                        <label for="street">Price</label>
-                        <input id="street" type="text" class="form-control">
+                        <label for="price">Price</label>
+                        <input id="price" name ="price" type="number" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
-                        <label for="company">Color</label>
-                        <input id="company" type="text" class="form-control">
+                        <label for="color">Color</label>
+                        <input id="color" name="color" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
-                        <label for="street">Street</label>
-                        <input id="street" type="text" class="form-control">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name='gender' class="form-control">
+                            <option value="volvo">men</option>
+                            <option value="volvo">women</option>
+                            <option value="volvo">unisex</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -47,49 +45,42 @@
             <div class="row">
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
-                        <label for="city">Height</label>
-                        <input id="city" type="text" class="form-control">
+                        <label for="height">Height</label>
+                        <input id="height" name='height' type="text" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
-                        <label for="zip">Closure</label>
-                        <input id="zip" type="text" class="form-control">
+                        <label for="closure">Closure</label>
+                        <input id="closure" name='closure' type="text" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
-                        <label for="state">Material</label>
-                        <select id="state" class="form-control"></select>
+                        <label for="material">Material</label>
+                        <select id="material" name='material' class="form-control">
+                            <option value="volvo">leather</option>
+                            <option value="volvo">plastic</option>
+                            <option value="volvo">canvas</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
-                        <label for="country">Country</label>
-                        <select id="country" class="form-control"></select>
+                        <label for="category">Category</label>
+                        <select id="category" name="category" class="form-control">
+                            <option value="volvo">baseketball</option>
+                            <option value="volvo">football</option>
+                            <option value="volvo">running</option>
+                            <option value="volvo">casual</option>
+                            <option value="volvo">skateboard</option>
+                        </select>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="form-group">
-                        <label for="phone">Gender</label>
-                        <input id="phone" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Kids
-                        </label>
-                    </div>
-                    <!-- <div class="form-group">
-                        <label for="email">Email</label>
-                        <input id="email" type="text" class="form-control">
-                    </div> -->
                 </div>
                 <div class="col-md-6 ">
                     <div class="form-group">
-                        <label for="phone">Image</label>
-                        <input id="phone" type="text" class="form-control">
+                        <label for="image">Image</label>
+                        <input id="image" name="image" type="text" class="form-control">
                     </div>
                 </div>
             </div>
@@ -97,7 +88,7 @@
         </div>
         <div class="box-footer">
             <button type="submit" class="btn btn-primary">
-                Save Product &nbsp;<iclass="fa fa-chevron-right"></i>
+                Save Product &nbsp; <i class="fa fa-chevron-right"></i>
             </button>
         </div>
     </form>
