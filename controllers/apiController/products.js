@@ -7,7 +7,6 @@ exports.getProductsApi = (req, res, next) => {
   const name = req.query.name
     ? { $regex: `.*${req.query.name}.*`, $options: 'i' }
     : null;
-  console.log(name);
   const filters = {
     name,
     category: req.query.category,
@@ -24,7 +23,6 @@ exports.getProductsApi = (req, res, next) => {
   Object.keys(filters).forEach(
     key => filters[key] === null && delete filters[key]
   ); // remove các filter null or undefined
-  console.log(filters);
   const sortBy = req.query.sortBy || 'createdDate';
 
   Product.countProducts(filters)
