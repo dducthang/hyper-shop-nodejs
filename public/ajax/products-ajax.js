@@ -52,10 +52,15 @@ function reloadProduct() {
         const productsNumber = getProductsNumber(); //selected quantity of product
         let productsList = '';
         let productBox;
-        data.products.forEach(product => {
-          productBox = getProductBox(product);
-          productsList += productBox;
-        });
+        if (data.products.length > 0) {
+          data.products.forEach(product => {
+            productBox = getProductBox(product);
+            productsList += productBox;
+          });
+        } else {
+          productsList =
+            "<div><p>Sorry, we don't have thing you need</p></div>";
+        }
         const pagesNumber = getPagesNumber(lastPage, page); //paging number ở dưới
         $('.products').html(productsList);
         $('.pages').html(pagesNumber);

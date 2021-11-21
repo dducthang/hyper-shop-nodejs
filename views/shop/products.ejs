@@ -42,12 +42,16 @@
 	<section class="item content container">
 		<div class="row justify-content-between">
 			<div class="col-md-3">
+				<%- include('../includes/sideBar/category')%>
 				<%- include('../includes/sideBar/brandFilterCard')%>
+				<%/*%>
+				
 				<%- include('../includes/sideBar/closureTypeFilterCard')%>
 				<%- include('../includes/sideBar/colorFilterCard')%>
 				<%- include('../includes/sideBar/genderFilterCard')%>
 				<%- include('../includes/sideBar/materialFilterCard')%>
 				<%- include('../includes/sideBar/shoesHeightFilterCard')%>
+				<%*/%>
 			</div>
 			<div class="col-md-9 ">
 				<div class="toparea">
@@ -68,7 +72,12 @@
 							<% for(product of products ){ %>
 								<%-include("../includes/bodyContent/productBox")%>
 							<% } %>
+						<% }else { %>
+							<p>There is no product here</p>
 						<% } %>
+						<%/*%>
+						fix cái there is no product ở file products-ajax.js dòng 61 luôn nha
+						<%*/%>
 					</div>
 				</div>
 				<div class="pages">

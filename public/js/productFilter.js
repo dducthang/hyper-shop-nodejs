@@ -19,6 +19,7 @@ $('.category-menu').on('click', '.category-filter', function () {
     'category',
     $(this).clone().children().remove().end().text() //remove span tag
   );
+  $('#search').val('');
 });
 $('.pages').on('click', '.page-link', function () {
   //const page = this.text;
