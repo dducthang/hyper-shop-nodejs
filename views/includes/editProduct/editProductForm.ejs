@@ -1,12 +1,14 @@
 <div class="box container">
-    <form method="post" action="/addProduct">
+    <form method="post" action="/editProduct">
         <h1>Add Product</h1>
         <div class="content py-3">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="productName">Product name</label>
-                        <input id="productName" name="productName" type="text" class="form-control">
+                        <input id="productName" name="productName" type="text" class="form-control"
+                            value="<%= product.name %>">
+                        <input type="hidden" name="productId" value="<%=product._id%>"/>
                     </div>
                 </div>
             </div>
@@ -15,26 +17,30 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="brand">Brand</label>
-                        <input id="brand" name="brand" type="text" class="form-control">
+                        <input id="brand" name="brand" type="text" class="form-control"
+                            value="<%= product.brand %>">
                         
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="price">Price</label>
-                        <input id="price" name="price" type="number" class="form-control">
+                        <input id="price" name="price" type="number" class="form-control"
+                            value="<%= product.price %>">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="color">Color</label>
-                        <input id="color" name="color" type="text" class="form-control">
+                        <input id="color" name="color" type="text" class="form-control"
+                        value="<%= product.color %>">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="gender">Gender</label>
-                        <select id="gender" name='gender' class="form-control">
+                        <select id="gender" name='gender' class="form-control"
+                            value="<%= product.sex %>">
                             <option value="men">men</option>
                             <option value="women">women</option>
                             <option value="unisex">unisex</option>
@@ -47,19 +53,22 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="height">Height</label>
-                        <input id="height" name='height' type="text" class="form-control">
+                        <input id="height" name='height' type="text" class="form-control"
+                        value="<%= product.shoesHeight %>">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="closure">Closure</label>
-                        <input id="closure" name='closure' type="text" class="form-control">
+                        <input id="closure" name='closure' type="text" class="form-control"
+                        value="<%= product.closureType %>">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="material">Material</label>
-                        <select id="material" name='material' class="form-control">
+                        <select id="material" name='material' class="form-control"
+                        value="<%= product.material %>">
                             <option value="leather">leather</option>
                             <option value="plastic">plastic</option>
                             <option value="canvas">canvas</option>
@@ -69,7 +78,8 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="category">Category</label>
-                        <select id="category" name="category" class="form-control">
+                        <select id="category" name="category" class="form-control"
+                        value="<%= product.category %>">
                             <option value="baseketball">baseketball</option>
                             <option value="football">football</option>
                             <option value="running">running</option>
@@ -80,10 +90,9 @@
                 </div>
                 <div class="col-md-6 ">
                     <div class="form-group">
-                        <label for="image-file">Image</label>
-                        <img src="" id="image" alt="shoes">
-                        <input type="file" id="imagefile" name="imagefile" class="form-control">
-                        <div class="btn" id="upload-img-btn" style="background-color: white; margin-top: 10px;">Up load image</div>
+                        <label for="image">Image</label>
+                        <input id="image" name="image" type="text" class="form-control"
+                        value="<%= product.image %>">
                     </div>
                 </div>
             </div>
@@ -96,59 +105,3 @@
         </div>
     </form>
 </div>
-<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
-<script type="module">
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyA16N-1ChgUr5J6-91RX4Rb0W3BVTZdvJE",
-        authDomain: "hyper-shop-db.firebaseapp.com",
-        databaseURL: "https://hyper-shop-db-default-rtdb.asia-southeast1.firebasedatabase.app/hyper-shop-db",
-        projectId: "hyper-shop-db",
-        storageBucket: "hyper-shop-db.appspot.com",
-        messagingSenderId: "445255799511",
-        appId: "1:445255799511:web:22832bfe045256ec6a5692"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    console.log(firebase);
-
-    function uploadImage() {
-      const ref = firebase.storage().ref();
-      const file = document.querySelector("#imagefile").files[0];
-      const name = +new Date() + "-" + file.name;
-      const metadata = {
-        contentType: file.type
-      };
-      const task = ref.child(name).put(file, metadata);
-      task
-        .then(snapshot => snapshot.ref.getDownloadURL())
-        .then(url => {
-          console.log(url);
-          document.querySelector("#image").src = url;
-        })
-        .catch(console.error);
-    }
-    
-    const imgUploadBtn = document.getElementById("upload-img-btn");
-    imgUploadBtn.addEventListener('click', uploadImage);
-
-    // function uploadImage() {
-    //     // const ref = app.storage().ref();
-    //     const storage = getStorage();
-    //     // console.log(file);
-    //     // let reader = new FileReader();
-    //     // let url="";
-    //     // reader.onload= function(){
-    //     //     document.querySelector("#image").src = reader.result;
-    //     //     url=reader.result;
-    //     // }
-    //     const storageRef = ref(storage, 'img/air-force-1-fontanka copy.jpg');  
-    //     const metadata = {
-    //         contentType:  'image/jpeg'//file.type
-    //     };
-    //     const task = uploadBytes(storageRef, file, metadata);
-    //     // url = reader.readAsDataURL(file);
-        
-    // }
-</script>

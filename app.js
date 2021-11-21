@@ -6,11 +6,11 @@ require('./db/mongoose.js');
 require('dotenv/config');
 
 
-const shopRoutes = require('./routes/shop');
-const productRoutes = require('./routes/product');
-const userRoutes = require('./routes/user');
-const authRoutes = require('./routes/auth');
-const orderRoutes = require('./routes/order');
+const shopRouter = require('./routes/shop');
+const productRouter = require('./routes/product');
+const userRouter = require('./routes/user');
+const authRouter = require('./routes/auth');
+const orderRouter = require('./routes/order');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -22,11 +22,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //routes
-app.use(shopRoutes);
-app.use(productRoutes);
-app.use(userRoutes);
-app.use(authRoutes);
-app.use(orderRoutes);
+app.use(shopRouter);
+app.use(productRouter);
+app.use(userRouter);
+app.use(authRouter);
+app.use(orderRouter);
 
 //server;
 app.listen(process.env.PORT || 4000, () => {

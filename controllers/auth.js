@@ -3,3 +3,4 @@ exports.getLogin = (req,res,next)=>{
         pageTitle:'Login',
     });
 }
+

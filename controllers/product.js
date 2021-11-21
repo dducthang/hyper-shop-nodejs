@@ -1,13 +1,15 @@
 const Product = require("../models/product");
+const express = require("express");
+const request = require('request');
 
 exports.getProducts = (req, res, next) => {
-  Product.find().then(products=>{
+  Product.find().then((products) => {
     res.render("shop/shop", {
       pageTitle: "Hyper shop",
       bannerText: "Hyper Shop",
-      products: products
-    });    
-  })
+      products: products,
+    });
+  });
 };
 
 exports.getProductDetail = (req, res, next) => {
@@ -71,20 +73,79 @@ exports.postAddProduct = (req, res, next) => {
     category: category,
     image: image,
   });
-  product
-    .save()
-    .then((result) => console.log("Created product"))
+  // console.log(request.post);
+
+  // request.post(
+  //     'https://hyper-shop-db-default-rtdb.asia-southeast1.firebasedatabase.app/hyper-shop-db.json',
+  //     { json: { key: 'value' } },
+  //     function (error, response, body) {
+  //        console.log(response.statusCode);
+  //        console.log(error);
+  //     }
+  // );
+
+};
+
+exports.testCallFetch = (req, res, next) => {
+  console.log(req);
+  debugger;
+  // fetch(
+  //   "https://hyper-shop-db-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  //   {
+  //     method: "POST",
+  //     body: JSON.stringify(product),
+  //     headers: {
+  //       "Content-type": "application/json",
+  //     },
+  //   }
+  // )
+  //   .then((response) => {
+  //     if (response.status >= 200 && response.status < 300) {
+  //       return response.json();
+  //     } else {
+  //       rsponse.json().then((error) => console.log(error));
+  //     }
+  //   })
+  //   .catch((error) => console.log(error));
+
+  // product
+  //   .save()
+  //   .then((result) => console.log("Created product"))
+  //   .catch((error) => console.log(error));
+  // };
+};
+
+exports.getEditProduct = (req, res, next) => {
+  const productId = req.params.productId;
+  Product.findById(productId)
+    .then((product) => {
+      res.render("shop/editProduct", {
+        product: product,
+        pageTitle: "Edit product",
+      });
+    })
     .catch((error) => console.log(error));
 };
 
-// [
-    //   {
-    //     id: "154435",
-    //     sport: "casual",
-    //     name: "Air force 1 Fontanka",
-    //     description:
-    //       "This is a short excerpt to generally describe what the item is about.",
-    //     price: 120,
-    //     image: "images/air-force-1-fontanka.jpg",
-    //   },
-    // ]
+exports.postEditProduct = (req, res, next) => {
+  const productId = req.body.productId;
+  Product.findById(productId)
+    .then((product) => {
+      (product.name = req.body.productName),
+        (product.brand = req.body.brand),
+        (product.price = req.body.price),
+        (product.color = req.body.color),
+        (product.sex = req.body.gender),
+        (product.shoesHeight = req.body.height),
+        (product.closureType = req.body.closure),
+        (product.material = req.body.material),
+        (product.category = req.body.category),
+        (product.image = req.body.image);
+      return product.save();
+    })
+    .then((result) => {
+      console.log("UPDATED PRODUCT!");
+      res.redirect("/products");
+    })
+    .catch((error) => console.log(error));
+};
