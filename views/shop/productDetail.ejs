@@ -1,6 +1,6 @@
 <%- include('../includes/head.ejs') %>
-<link href="css/style.css" rel="stylesheet">
-<link href="css/custom.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+<link href="/css/custom.css" rel="stylesheet">
 </head>
 <body>
     <%- include('../includes/subHeader')%>
@@ -39,8 +39,8 @@
                     </div>
                     <div class="properties-box">
                         <ul class="unstyle">
-                            <li><b class="propertyname">Version:</b> 1.0</li>
-                            <li><b class="propertyname">Image Size:</b> 2340x1200</li>
+                            <li><b class="propertyname">Brand:</b><%=product.brand%></li>
+                            <li><b class="propertyname">Color:</b><%=product.color%></li>
                             <li><b class="propertyname">Files Included:</b> mp3, audio, jpeg, png</li>
                             <li><b class="propertyname">Documentation:</b> Well Documented</li>
                             <li><b class="propertyname">License:</b> GNU</li>
@@ -95,7 +95,17 @@
                             </div>
                         </div>
                     </form>
-                    <a href="#" class="btn btn-buynow">Edit</a>
+                    <div style="margin-top: 20px;">
+                        <div class="col-md-6">
+                            <a href="/products/editProduct/<%=product._id%>" class="btn btn-buynow">Edit</a>
+                        </div>
+                        <div class="col-md-6">
+                            <form action="/products/deleteProduct" method="post">
+                                <input type="hidden" name="productId" value="<%=product._id%>">
+                                <button class="btn btn-buynow" style="background-color: rgb(194, 53, 53);">Delete</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -105,8 +115,8 @@
     <section class="container toparea comment-box">
         <span class="medium-text">Product review and feedback</span>
         <div class="divide"></div>
-        <% if (product.comments.length> 0) { %>
-            <% for (comment of product.comments){ %>
+        <% if (comments.length> 0) { %>
+            <% for (comment of comments){ %>
                 <!-- <span></span> -->
                 <%- include('../includes/comment', {comment:comment}) %> 
                

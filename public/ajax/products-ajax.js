@@ -33,6 +33,7 @@ function reloadProduct() {
   Object.keys(filters).forEach(
     key => filters[key] === (undefined || null) && delete filters[key]
   ); // remove các filter null or undefined
+  console.log(filters);
   if (page !== '...')
     $.ajax({
       url,
@@ -59,7 +60,7 @@ function reloadProduct() {
           });
         } else {
           productsList =
-            "<div><p>Sorry, we don't have thing you need</p></div>";
+            "<div class='center'><p>Sorry, we don't have things you need</p></div>";
         }
         const pagesNumber = getPagesNumber(lastPage, page); //paging number ở dưới
         $('.products').html(productsList);
@@ -80,7 +81,7 @@ function getProductBox(product) {
       <div class="captionshop text-center" style="display: none">
         <h3>${product.name}</h3>
         <p class="row">
-          <a href="/addProduct" class="learn-more detailslearn col-6"
+          <a href="/products/editProduct/${product._id}" class="learn-more detailslearn col-6"
             ><i class="fa fa-shopping-cart"></i> Edit</a
           >
           <a href="/products/${product._id}" class="learn-more detailslearn col-6"
@@ -93,7 +94,7 @@ function getProductBox(product) {
       /></span>
     </div>
     <div class="product-details">
-      <a href="#">
+      <a href="/products/${product._id}">
       <h1>${product.name}</h1>
       </a>
       <span class="price">

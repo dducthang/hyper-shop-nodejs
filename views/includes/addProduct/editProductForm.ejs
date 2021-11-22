@@ -1,12 +1,13 @@
 <div class="box container">
-    <form method="post" action="/products/addProduct">
-        <h1>Add Product</h1>
+    <form method="post" action="/products/editProduct">
+        <h1>Edit Product</h1>
+        <input id="productId" name="productId" type="hidden" class="form-control" value="<%=product._id%>">
         <div class="content py-3">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="productName">Product name</label>
-                        <input id="productName" name="productName" type="text" class="form-control">
+                        <input id="productName" name="productName" type="text" class="form-control" value="<%=product.name%>">
                     </div>
                 </div>
             </div>
@@ -15,28 +16,28 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="brand">Brand</label>
-                        <input id="brand" name="brand" type="text" class="form-control">
+                        <input id="brand" name="brand" type="text" class="form-control" value="<%=product.brand%>">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="price">Price</label>
-                        <input id="price" name ="price" type="number" class="form-control">
+                        <input id="price" name ="price" type="number" class="form-control" value="<%=product.price%>">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="color">Color</label>
-                        <input id="color" name="color" type="text" class="form-control">
+                        <input id="color" name="color" type="text" class="form-control" value="<%=product.color%>">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="gender">Gender</label>
-                        <select id="gender" name='gender' class="form-control">
-                            <option value="volvo">men</option>
-                            <option value="volvo">women</option>
-                            <option value="volvo">unisex</option>
+                        <select id="gender" name='gender' class="form-control" value="<%=product.sex%>">
+                            <option value="men">men</option>
+                            <option value="women">women</option>
+                            <option value="unisex">unisex</option>
                         </select>
                     </div>
                 </div>
@@ -46,29 +47,29 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="height">Height</label>
-                        <input id="height" name='height' type="text" class="form-control">
+                        <input id="height" name='height' type="text" class="form-control" value="<%=product.shoesHeight%>">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="closure">Closure</label>
-                        <input id="closure" name='closure' type="text" class="form-control">
+                        <input id="closure" name='closure' type="text" class="form-control" value="<%=product.closureType%>">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="material">Material</label>
-                        <select id="material" name='material' class="form-control">
-                            <option value="volvo">leather</option>
-                            <option value="volvo">plastic</option>
-                            <option value="volvo">canvas</option>
+                        <select id="material" name='material' class="form-control" value="<%=product.material%>">
+                            <option value="leather">leather</option>
+                            <option value="plastic">plastic</option>
+                            <option value="canvas">canvas</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="category">Category</label>
-                        <select id="category" name="category" class="form-control">
+                        <select id="category" name="category" class="form-control" value="<%=product.category%>">
                             <option value="volvo">baseketball</option>
                             <option value="volvo">football</option>
                             <option value="volvo">running</option>
