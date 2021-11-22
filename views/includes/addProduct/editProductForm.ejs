@@ -1,5 +1,5 @@
 <div class="box container">
-    <form method="post" action="/products/editProduct">
+    <form method="post" action="/products/editProduct" role="form" enctype="multipart/form-data">
         <h1>Edit Product</h1>
         <input id="productId" name="productId" type="hidden" class="form-control" value="<%=product._id%>">
         <div class="content py-3">
@@ -81,7 +81,7 @@
                 <div class="col-md-6 ">
                     <div class="form-group">
                         <label for="image">Image</label>
-                        <input id="image" name="image" type="text" class="form-control">
+                        <input id="image" name="image" type="file" class="form-control">
                     </div>
                 </div>
             </div>
