@@ -1,13 +1,14 @@
 $('.pages').on('click', '.page-link', reloadProduct);
 $('.category-menu').on('click', '.category-filter', reloadProduct);
 $('.products-number').on('click', '.show-products-quantity', reloadProduct);
-$('#search').on('input', reloadProduct);
+$('#search').on('input', function () {
+  sessionStorage.removeItem('page'); //nếu products đc reload vì người dùng search, set page lại bằng 1
+  reloadProduct();
+});
 
 function reloadProduct() {
   const name = $('#search').val() !== '' ? $('#search').val() : null; //search by name
-  if (name !== null) {
-    sessionStorage.removeItem('page'); //nếu products đc reload vì người dùng search, set page lại bằng 1
-  }
+
   event.preventDefault();
   const url = 'http://localhost:4000/api/products';
   let page = sessionStorage.getItem('page') || 1;
@@ -33,7 +34,6 @@ function reloadProduct() {
   Object.keys(filters).forEach(
     key => filters[key] === (undefined || null) && delete filters[key]
   ); // remove các filter null or undefined
-  console.log(filters);
   if (page !== '...')
     $.ajax({
       url,
@@ -60,7 +60,7 @@ function reloadProduct() {
           });
         } else {
           productsList =
-            "<div class='center'><p>Sorry, we don't have things you need</p></div>";
+            "<div><p>Sorry, we don't have thing you need</p></div>";
         }
         const pagesNumber = getPagesNumber(lastPage, page); //paging number ở dưới
         $('.products').html(productsList);
@@ -81,7 +81,7 @@ function getProductBox(product) {
       <div class="captionshop text-center" style="display: none">
         <h3>${product.name}</h3>
         <p class="row">
-          <a href="/products/editProduct/${product._id}" class="learn-more detailslearn col-6"
+          <a href="/addProduct" class="learn-more detailslearn col-6"
             ><i class="fa fa-shopping-cart"></i> Edit</a
           >
           <a href="/products/${product._id}" class="learn-more detailslearn col-6"
@@ -94,7 +94,7 @@ function getProductBox(product) {
       /></span>
     </div>
     <div class="product-details">
-      <a href="/products/${product._id}">
+      <a href="#">
       <h1>${product.name}</h1>
       </a>
       <span class="price">
