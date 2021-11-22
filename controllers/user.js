@@ -10,9 +10,3 @@ exports.getUserDetail = (req,res,next)=>{
         pageTitle:'User Profile',
     });
 }
-
-exports.getUserProfile = (req,res,next)=>{
-    res.render('shop/userProfile', {
-        pageTitle:'User Profile',
-    });
-}

@@ -1,4 +1,4 @@
-const Product = require('../../models/product');
+const Product = require('../../Models/product');
 
 exports.getProductsApi = (req, res, next) => {
   const page = +req.query.page || 1;

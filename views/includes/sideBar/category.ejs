@@ -1,3 +1,33 @@
+<!-- <div class="card sidebar-menu mb-4">
+  <div class="card-header">
+    <h3 class="h4 card-title">Categories</h3>
+  </div>
+  <div class="card-body">
+    <ul class="nav nav-pills flex-column category-menu">
+      <%for(cat of categories) {%>
+        <li style="width: 100%;">
+          <a href="/products?category=<%=cat.name%>" class="nav-link category-filter text-uppercase row">
+            <div class="col-md-9">
+              <%=cat.name%>
+            </div>
+            <div class="col-md-3">
+              <span class="badge badge-secondary">
+                <%=cat.quantity%>
+              </span>
+            </div>
+          </a>
+        </li>
+        <a href="/products?category=<%=cat.name%>" class="nav-link category-filter text-uppercase">
+          <%=cat.name%>
+            <span class="badge badge-secondary">
+              <%=cat.quantity%>
+            </span>
+        </a>
+        <%}%>
+    </ul>
+  </div>
+</div> -->
+
 <div class="card sidebar-menu mb-4">
   <div class="card-header">
     <h3 class="h4 card-title">Categories</h3>
@@ -5,16 +35,10 @@
   <div class="card-body">
     <ul class="nav nav-pills flex-column category-menu">
       <%for(cat of categories) {%>
-      <li>
-        <a
-          href="/products?category=<%=cat.name%>"
-          class="nav-link category-filter text-uppercase"
-          ><%=cat.name%><span class="badge badge-secondary"
-            ><%=cat.quantity%></span
-          ></a
-        >
-      </li>
-      <%}%>
+        <li>
+          <a href="/products?category=<%=cat.name%>" class="nav-link category-filter text-uppercase"><%=cat.name%><span class="badge badge-secondary"><%=cat.quantity%></span></a>
+        </li>
+        <%}%>
     </ul>
   </div>
 </div>
