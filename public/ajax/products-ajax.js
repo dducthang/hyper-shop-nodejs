@@ -81,7 +81,7 @@ function getProductBox(product) {
       <div class="captionshop text-center" style="display: none">
         <h3>${product.name}</h3>
         <p class="row">
-          <a href="/addProduct" class="learn-more detailslearn col-6"
+          <a href="/products/editProduct/${product._id}" class="learn-more detailslearn col-6"
             ><i class="fa fa-shopping-cart"></i> Edit</a
           >
           <a href="/products/${product._id}" class="learn-more detailslearn col-6"
@@ -94,7 +94,7 @@ function getProductBox(product) {
       /></span>
     </div>
     <div class="product-details">
-      <a href="#">
+      <a href="/products/${product._id}">
       <h1>${product.name}</h1>
       </a>
       <span class="price">

@@ -48,7 +48,7 @@
 		<div class="container">
 			<div class="underlined-title">
 				<div class="editContent">
-					<h1 class="text-center latestitems">LATEST ITEMS</h1>
+					<!-- <h1 class="text-center latestitems">LATEST ITEMS</h1> -->
 				</div>
 				<div class="wow-hr type_short">
 					<span class="wow-hr-h">
@@ -58,13 +58,6 @@
 					</span>
 				</div>
 			</div>
-			<div class="row">
-				<% if(products.length > 0) { %>
-					<% for (product of products) {%>
-						<%- include('../includes/bodyContent/productBox.ejs', {product: product})%>
-					<% } %>
-				<% } %>
-			</div>
 		</div>
 	</div>
 	</section>
@@ -72,7 +65,7 @@
 	<!-- BUTTON =============================-->
 	<div class="item content">
 		<div class="container text-center">
-			<a href="/shop" class="homebrowseitems">Browse All Products
+			<a href="/products" class="homebrowseitems">Browse All Products
 			<div class="homebrowseitemsicon">
 				<i class="fa fa-star fa-spin"></i>
 			</div>
