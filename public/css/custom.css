@@ -149,6 +149,10 @@
 }
 
 /* pagination ==================== */
+
+.custom-hover:hover{
+  cursor: pointer;
+}
 .pages {
   margin-top: 30px;
   display: flex;
