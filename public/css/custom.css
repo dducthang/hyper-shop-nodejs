@@ -247,9 +247,10 @@
   margin-bottom: 50px;
 }
 
-.box-footer {
-  display: flex;
-  justify-content: flex-end;
+.box-footer-btn {
+  width: 200px;
+  margin: 0 10px;
+
 }
 
 /* ============================= USER LIST ================================ */
