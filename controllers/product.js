@@ -1,16 +1,19 @@
 const Product = require("../Models/product");
 const multer = require("multer");
 const path = require("path");
+const sharp = require("sharp");
+const fs = require("fs");
 
-const storage = multer.diskStorage({
-  destination: "./public/img",
-  filename: function (req, file, callback) {
-    callback(
-      null,
-      file.originalname + "-" + Date.now() + path.extname(file.originalname)
-    );
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: "./public/img",
+//   filename: function (req, file, callback) {
+//     callback(
+//       null,
+//       file.originalname + "-" + Date.now() + path.extname(file.originalname)
+//     );
+//   },
+// });
+const storage = multer.memoryStorage();
 
 let upload = multer({
   storage: storage,
@@ -93,33 +96,62 @@ exports.getAddProduct = (req, res, next) => {
   });
 };
 
+// exports.postAddProduct = (req, res, next) => {
+//   upload(req, res, (err) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(req.file);
+//       const product = {
+//         name: req.body.productName,
+//         brand: req.body.brand,
+//         price: req.body.price,
+//         color: req.body.color,
+//         gender: req.body.gender,
+//         height: req.body.height,
+//         closure: req.body.closure,
+//         material: req.body.material,
+//         category: req.body.category,
+//         image: "/img/" + req.file.filename,
+//       };
+//       Product.createProduct(product).then((result) => {
+//         console.log("Created product");
+//         res.render("shop/addProduct", {
+//           pageTitle: "Add product",
+//         });
+//       });
+//     }
+//   })
+// };
+
 exports.postAddProduct = (req, res, next) => {
-  upload(req, res, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(req.file);
-      const product = {
-        name: req.body.productName,
-        brand: req.body.brand,
-        price: req.body.price,
-        color: req.body.color,
-        gender: req.body.gender,
-        height: req.body.height,
-        closure: req.body.closure,
-        material: req.body.material,
-        category: req.body.category,
-        image: "/img/" + req.file.filename,
-      };
-      Product.createProduct(product).then((result) => {
-        console.log("Created product");
-        res.render("shop/addProduct", {
-          pageTitle: "Add product",
-        });
+  upload(req, res, (err)= async()=>{
+    console.log(req.file);
+    const product = {
+      name: req.body.productName,
+      brand: req.body.brand,
+      price: req.body.price,
+      color: req.body.color,
+      gender: req.body.gender,
+      height: req.body.height,
+      closure: req.body.closure,
+      material: req.body.material,
+      category: req.body.category,
+      image: "/img/" + req.file.originalname,
+    };
+
+    await sharp(req.file.buffer).resize({
+      width: 592, height: 592
+    }).toFile("./public/img/"+req.file.originalname);
+
+    Product.createProduct(product).then((result) => {
+      console.log("Created product");
+      res.render("shop/addProduct", {
+        pageTitle: "Add product",
       });
-    }
+    });
   });
-};
+}
 
 exports.getEditProduct = (req, res, next) => {
   const productId = req.params.productId;
@@ -132,33 +164,35 @@ exports.getEditProduct = (req, res, next) => {
 };
 
 exports.postEditProduct = (req, res, next) => {
-  upload(req, res, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(req.file);
-      const product = {
-        id:req.body.productId,
-        name: req.body.productName,
-        brand: req.body.brand,
-        price: req.body.price,
-        color: req.body.color,
-        gender: req.body.gender,
-        height: req.body.height,
-        closure: req.body.closure,
-        material: req.body.material,
-        category: req.body.category,
-        image: "/img/" + req.file.filename,
-      };
-      Product.updateProduct(product)
-        .then((result) => {
-          console.log("UPDATED PRODUCT");
-          res.redirect("/products");
-        })
-        .catch((error) => console.log(error));
-    }
-  });
-};
+  upload(req, res, (err)= async()=>{
+    const product = {
+      id:req.body.productId,
+      name: req.body.productName,
+      brand: req.body.brand,
+      price: req.body.price,
+      color: req.body.color,
+      gender: req.body.gender,
+      height: req.body.height,
+      closure: req.body.closure,
+      material: req.body.material,
+      category: req.body.category,
+      image: "/img/" + req.file.originalname,
+    };
+
+    await sharp(req.file.buffer).resize({
+      width: 592, height: 592
+    }).toFile("./public/img/"+req.file.originalname);
+
+    Product.updateProduct(product)
+      .then((result) => {
+        console.log("UPDATED PRODUCT");
+        res.redirect("/products");
+      })
+      .catch((error) => console.log(error));
+  }
+)};
+
+
 
 exports.postDeleteProduct = (req, res, next) => {
   const productId = req.body.productId;
