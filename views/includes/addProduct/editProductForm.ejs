@@ -1,13 +1,13 @@
 <div class="box container">
     <form method="post" action="/products/editProduct" role="form" enctype="multipart/form-data">
         <h1>Edit Product</h1>
-        <input id="productId" name="productId" type="hidden" class="form-control" value="<%=product._id%>">
+        <input id="productId" name="productId" type="hidden" class="form-control" value="<%=product._id?product._id:product.id%>">
         <div class="content py-3">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="productName">Product name</label>
-                        <input id="productName" name="productName" type="text" class="form-control" value="<%=product.name%>">
+                        <input required id="productName" name="productName" type="text" class="form-control" value="<%=product.name%>">
                     </div>
                 </div>
             </div>
@@ -16,19 +16,19 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="brand">Brand</label>
-                        <input id="brand" name="brand" type="text" class="form-control" value="<%=product.brand%>">
+                        <input required id="brand" name="brand" type="text" class="form-control" value="<%=product.brand%>">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="price">Price</label>
-                        <input id="price" name ="price" type="number" class="form-control" value="<%=product.price%>">
+                        <input required id="price" name ="price" type="number" class="form-control" value="<%=product.price%>">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="color">Color</label>
-                        <input id="color" name="color" type="text" class="form-control" value="<%=product.color%>">
+                        <input required id="color" name="color" type="text" class="form-control" value="<%=product.color%>">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
@@ -47,13 +47,13 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="height">Height</label>
-                        <input id="height" name='height' type="text" class="form-control" value="<%=product.shoesHeight%>">
+                        <input required id="height" name='height' type="text" class="form-control" value="<%=product.shoesHeight%>">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form-group">
                         <label for="closure">Closure</label>
-                        <input id="closure" name='closure' type="text" class="form-control" value="<%=product.closureType%>">
+                        <input required id="closure" name='closure' type="text" class="form-control" value="<%=product.closureType%>">
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
@@ -87,10 +87,13 @@
             </div>
             <!-- /.row-->
         </div>
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">
-                Save Product &nbsp; <i class="fa fa-chevron-right"></i>
-            </button>
+        <div class="form-footer row">
+            <div class="col-lg-4 box-footer">
+                <button type="submit" class=" btn btn-primary">
+                    Save Product &nbsp; <i class="fa fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="col-lg-6 error"><%=error%></div>
         </div>
     </form>
 </div>
