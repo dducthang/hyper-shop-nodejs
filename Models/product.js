@@ -97,7 +97,7 @@ function updateProduct(newProduct) {
     product.closureType= newProduct.closure;
     product.material= newProduct.material;
     product.category= newProduct.category;
-    product.image= newProduct.image;
+    if(newProduct.image) product.image= newProduct.image;
     return product.save();
   });
 }
