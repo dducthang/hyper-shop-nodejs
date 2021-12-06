@@ -7,7 +7,7 @@ exports.getAdmins = async () => {
 
 exports.getAdmin = async filter => {
   const admin = await User.findOne(filter);
-  if (admin.isAdmin) return admin;
+  if (admin && admin.isAdmin) return admin;
   return undefined;
 };
 
