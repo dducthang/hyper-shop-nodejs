@@ -24,12 +24,11 @@ const userSchema = new mongoose.Schema({
   avatar: String,
   address: {
     type: String,
-    required: true,
   },
   phone: {
     type: String,
     minlength: 10,
-    maxlength: 10
+    maxlength: 10,
   },
   isLock: {
     type: Boolean,
