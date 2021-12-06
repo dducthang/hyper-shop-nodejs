@@ -4,15 +4,6 @@ const path = require("path");
 const sharp = require("sharp");
 const fs = require("fs");
 
-// const storage = multer.diskStorage({
-//   destination: "./public/img",
-//   filename: function (req, file, callback) {
-//     callback(
-//       null,
-//       file.originalname + "-" + Date.now() + path.extname(file.originalname)
-//     );
-//   },
-// });
 const storage = multer.memoryStorage();
 
 let upload = multer({
@@ -58,6 +49,7 @@ exports.getProducts = (req, res, next) => {
         currentPage: page,
         lastPage: Math.ceil(productsCount / productsPerPage),
         categories: await Product.getCategoriesQuantity(),
+        user:req.user
       });
     });
 };
@@ -86,6 +78,7 @@ exports.getProductDetail = (req, res, next) => {
           response: "Thank you for your feedback. This is our pleasure",
         },
       ],
+      user: req.user
     });
   });
 };
@@ -94,7 +87,8 @@ exports.getAddProduct = (req, res, next) => {
   res.render("shop/addProduct", {
     pageTitle: "Add product",
     error: null,
-    product:{}
+    product:{},
+    user: req.user
   });
 };
 
@@ -176,7 +170,8 @@ exports.getEditProduct = (req, res, next) => {
     res.render("shop/editProduct", {
       product: product,
       pageTitle: "Edit product",
-      error: null
+      error: null,
+      user: req.user
     });
   });
 };

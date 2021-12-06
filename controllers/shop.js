@@ -26,7 +26,8 @@ exports.getIndex = (req, res, next)=>{
                 price:120,
                 image:'images/zoom-freak-3.jpg'
             },
-        ]
+        ],
+        user:req.user
     });
 }
 

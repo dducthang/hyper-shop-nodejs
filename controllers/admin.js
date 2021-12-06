@@ -5,13 +5,14 @@ exports.getAdmins = async (req, res, next) => {
   res.render('shop/adminList', {
     pageTitle: 'Admin List',
     admins,
+    user: req.user
   });
 };
 
 exports.getProfile = (req, res, next) => {
   res.render('shop/profile', {
     pageTitle: 'Profile',
-    profile: req.user,
+    user: req.user,
   });
 };
 
@@ -21,11 +22,13 @@ exports.getAdmin = async (req, res, next) => {
   res.render('shop/adminDetails', {
     pageTitle: 'Admin Details',
     profile,
+    user:req.user
   });
 };
 exports.getAddAdmin = async (req, res, next) => {
   res.render('shop/addAdmin', {
     pageTitle: 'Add Admin',
+    user: req.user
   });
 };
 exports.addAdmin = async (req, res, next) => {
@@ -42,6 +45,7 @@ exports.addAdmin = async (req, res, next) => {
     return res.render('shop/addAdmin', {
       pageTitle: 'Add Admin',
       categories: await Product.getCategoriesQuantity(),
+      user:req.user
     }); //nếu catch đc bất kỳ lỗi nào thì chuyển về
   }
   return res.redirect('/admins');

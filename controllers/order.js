@@ -9,6 +9,6 @@ exports.getOrders = (req,res,next)=>{
                 image: 'images/kd14.jpg',
                 quantity: 1
             }
-        ]
+        ],
     });
 }
