@@ -1,12 +1,12 @@
-require('dotenv/config');
-const mongoose = require('mongoose');
+require("dotenv/config");
+const mongoose = require("mongoose");
 
 const connectionString = process.env.CONNECTION_STRING;
 mongoose
   .connect(connectionString)
   .then(() => {
-    console.log('Database connected');
+    console.log("Database connected");
   })
-  .catch(e => {
+  .catch((e) => {
     console.log(e);
   });
