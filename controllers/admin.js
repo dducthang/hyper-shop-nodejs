@@ -1,5 +1,5 @@
-const AdminService = require('../Models/services/adminServices');
-const Product = require('../Models/product');
+const AdminService = require('../models/services/adminServices');
+const Product = require('../models/product');
 exports.getAdmins = async (req, res, next) => {
   const admins = await AdminService.getAdmins();
   res.render('shop/adminList', {
@@ -16,7 +16,8 @@ exports.getProfile = (req, res, next) => {
 };
 
 exports.getAdmin = async (req, res, next) => {
-  const profile = await AdminService.getAdmin(req.id);
+  const profile = await AdminService.getAdmin({ _id: req.params.id });
+  if (!profile) return res.redirect('/');
   res.render('shop/adminDetails', {
     pageTitle: 'Admin Details',
     profile,
@@ -36,7 +37,6 @@ exports.addAdmin = async (req, res, next) => {
       password,
       phone,
     });
-
   } catch (e) {
     console.log(e);
     return res.render('shop/addAdmin', {

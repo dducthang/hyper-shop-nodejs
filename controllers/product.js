@@ -1,4 +1,4 @@
-const Product = require("../Models/product");
+const Product = require("../models/product");
 const multer = require("multer");
 const path = require("path");
 const sharp = require("sharp");
