@@ -10,7 +10,7 @@ function reloadProduct() {
   const name = $('#search').val() !== '' ? $('#search').val() : null; //search by name
 
   event.preventDefault();
-  const url = 'https://hyper-shop-admin.herokuapp.com/api/products';
+  const url = 'http://localhost:4000/api/products';
   let page = sessionStorage.getItem('page') || 1;
   if (page === 'First') page = 1;
   if (page === 'Last') page = sessionStorage.getItem('lastPage');
