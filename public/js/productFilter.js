@@ -29,3 +29,4 @@ $('.products-number').on('click', '.show-products-quantity', function () {
   sessionStorage.setItem('productsPerPage', this.text);
   sessionStorage.removeItem('page');
 });
+

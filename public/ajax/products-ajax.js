@@ -7,7 +7,7 @@ $('#search').on('input', function () {
 });
 
 function reloadProduct() {
-  const name = $('#search').val() !== '' ? $('#search').val() : null; //search by name
+    const name = $('#search').val() !== '' ? $('#search').val() : null; //search by name
 
   event.preventDefault();
   const url = 'http://localhost:4000/api/products';
