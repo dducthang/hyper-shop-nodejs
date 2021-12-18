@@ -13,6 +13,10 @@ const orderSchema = new mongoose.Schema({
       required: true,
     },
   ],
+  address:{
+    type: String,
+    defalt: ""
+  },
   status: {
     type: String,
     default: 'Pending',
