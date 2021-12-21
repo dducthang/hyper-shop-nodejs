@@ -41,7 +41,7 @@ exports.getProducts = (req, res, next) => {
         .limit(productsPerPage);
     })
     .then(async function (products) {
-      res.render("shop/products", {
+      res.status(200).render("shop/products", {
         pageTitle: "Products",
         products,
         productsPerPage,
@@ -57,7 +57,7 @@ exports.getProducts = (req, res, next) => {
 exports.getProductDetail = (req, res, next) => {
   const productId = req.params.productId;
   ProductService.getProduct(productId).then((product) => {
-    res.render("shop/productDetail", {
+    res.status(200).render("shop/productDetail", {
       pageTitle: "Product detail",
       bannerText: "Product",
       product: product,
@@ -84,7 +84,7 @@ exports.getProductDetail = (req, res, next) => {
 };
 
 exports.getAddProduct = (req, res, next) => {
-  res.render("shop/addProduct", {
+  res.status(200).render("shop/addProduct", {
     pageTitle: "Add product",
     error: null,
     product:{},
@@ -112,7 +112,7 @@ exports.getAddProduct = (req, res, next) => {
 //       };
 //       ProductService.createProduct(product).then((result) => {
 //         console.log("Created product");
-//         res.render("shop/addProduct", {
+//         res.status(200).render("shop/addProduct", {
 //           pageTitle: "Add product",
 //         });
 //       });
@@ -136,7 +136,7 @@ exports.postAddProduct = (req, res, next) => {
       
       const checktype = req.file.mimetype;
       if (!checktype.includes("image")){
-        res.render("shop/addProduct", {
+        res.status(400).render("shop/addProduct", {
           product: product,
           pageTitle: "Add product",
           error: "Type of image file is not appropriate"
@@ -153,7 +153,7 @@ exports.postAddProduct = (req, res, next) => {
   
         ProductService.createProduct(product).then((result) => {
           console.log("Created product");
-          res.render("shop/addProduct", {
+          res.status(200).render("shop/addProduct", {
             pageTitle: "Add product",
             error: null,
             product: null
@@ -167,7 +167,7 @@ exports.postAddProduct = (req, res, next) => {
 exports.getEditProduct = (req, res, next) => {
   const productId = req.params.productId;
   ProductService.getProduct(productId).then((product) => {
-    res.render("shop/editProduct", {
+    res.status(200).render("shop/editProduct", {
       product: product,
       pageTitle: "Edit product",
       error: null,
@@ -205,7 +205,7 @@ exports.postEditProduct = (req, res, next) => {
             .toFile("./public/img/" + req.file.originalname);
         }
         if (!checktype.includes("image")){
-          res.render(`shop/editProduct`, {
+          res.status(400).render(`shop/editProduct`, {
             product: product,
             pageTitle: "Edit product",
             error: "Type of image file is not appropriate"
@@ -216,7 +216,7 @@ exports.postEditProduct = (req, res, next) => {
       ProductService.updateProduct(product)
         .then((result) => {
           console.log("UPDATED PRODUCT");
-          res.redirect("/products");
+          res.status(201).redirect("/products");
         })
         .catch((error) => console.log(error));
     })
@@ -228,7 +228,7 @@ exports.postDeleteProduct = (req, res, next) => {
   ProductService.deleteProduct(productId)
     .then(() => {
       console.log("DELETED PRODUCT");
-      res.redirect("/products");
+      res.status(200).redirect("/products");
     })
     .catch((err) => console.log(err));
 };

@@ -6,7 +6,7 @@ const adminController = require('../controllers/admin');
 
 router.get('/', adminController.getAdmins);
 router.get('/profile', adminController.getProfile);
-router.get('/addadmin', adminController.getAddAdmin);
-router.post('/addadmin', adminController.addAdmin);
-router.get('/:id', adminController.getAdmin);
+router.get('/add', adminController.getAddAdmin);
+router.post('/add', adminController.addAdmin);
+router.get('/:id([0-9a-fA-F]{24})', adminController.getAdmin);
 module.exports = router;

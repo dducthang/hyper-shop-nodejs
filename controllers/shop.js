@@ -1,5 +1,5 @@
 exports.getIndex = (req, res, next)=>{
-    res.render('shop/index',{
+    res.status(200).render('shop/index',{
         pageTitle:'Hyper shop',
         products:[
             {
