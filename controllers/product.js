@@ -1,4 +1,4 @@
-const Product = require("../models/product");
+const ProductService = require("../models/services/productService");
 const multer = require("multer");
 const path = require("path");
 const sharp = require("sharp");
@@ -29,13 +29,13 @@ exports.getProducts = (req, res, next) => {
 
   const sortBy = req.query.sortBy || "createdDate";
 
-  Product.countProducts(filters)
+  ProductService.countProducts(filters)
     .then((n) => {
       productsCount = n;
       if (req.query.productsPerPage === "all") {
         productsPerPage = n;
       }
-      return Product.getProducts(filters)
+      return ProductService.getProducts(filters)
         .sort(sortBy)
         .skip((page - 1) * productsPerPage)
         .limit(productsPerPage);
@@ -48,7 +48,7 @@ exports.getProducts = (req, res, next) => {
         productsCount,
         currentPage: page,
         lastPage: Math.ceil(productsCount / productsPerPage),
-        categories: await Product.getCategoriesQuantity(),
+        categories: await ProductService.getCategoriesQuantity(),
         user:req.user
       });
     });
@@ -56,7 +56,7 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProductDetail = (req, res, next) => {
   const productId = req.params.productId;
-  Product.getProduct(productId).then((product) => {
+  ProductService.getProduct(productId).then((product) => {
     res.render("shop/productDetail", {
       pageTitle: "Product detail",
       bannerText: "Product",
@@ -110,7 +110,7 @@ exports.getAddProduct = (req, res, next) => {
 //         category: req.body.category,
 //         image: "/img/" + req.file.filename,
 //       };
-//       Product.createProduct(product).then((result) => {
+//       ProductService.createProduct(product).then((result) => {
 //         console.log("Created product");
 //         res.render("shop/addProduct", {
 //           pageTitle: "Add product",
@@ -151,7 +151,7 @@ exports.postAddProduct = (req, res, next) => {
           })
           .toFile("./public/img/" + req.file.originalname);
   
-        Product.createProduct(product).then((result) => {
+        ProductService.createProduct(product).then((result) => {
           console.log("Created product");
           res.render("shop/addProduct", {
             pageTitle: "Add product",
@@ -166,7 +166,7 @@ exports.postAddProduct = (req, res, next) => {
 
 exports.getEditProduct = (req, res, next) => {
   const productId = req.params.productId;
-  Product.getProduct(productId).then((product) => {
+  ProductService.getProduct(productId).then((product) => {
     res.render("shop/editProduct", {
       product: product,
       pageTitle: "Edit product",
@@ -213,7 +213,7 @@ exports.postEditProduct = (req, res, next) => {
           return ;
         }
       }
-      Product.updateProduct(product)
+      ProductService.updateProduct(product)
         .then((result) => {
           console.log("UPDATED PRODUCT");
           res.redirect("/products");
@@ -225,7 +225,7 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res, next) => {
   const productId = req.body.productId;
-  Product.deleteProduct(productId)
+  ProductService.deleteProduct(productId)
     .then(() => {
       console.log("DELETED PRODUCT");
       res.redirect("/products");

@@ -1,4 +1,5 @@
 const Product = require('../../models/product');
+const ProductService = require('../../models/services/productService');
 
 exports.getProductsApi = (req, res, next) => {
   const page = +req.query.page || 1;
@@ -25,13 +26,13 @@ exports.getProductsApi = (req, res, next) => {
   ); // remove các filter null or undefined
   const sortBy = req.query.sortBy || 'createdDate';
 
-  Product.countProducts(filters)
+  ProductService.countProducts(filters)
     .then(n => {
       productsCount = n;
       if (req.query.productsPerPage === 'All') {
         productsPerPage = n;
       }
-      return Product.getProducts(filters)
+      return ProductService.getProducts(filters)
         .sort(sortBy)
         .skip((page - 1) * productsPerPage)
         .limit(productsPerPage);

@@ -1,5 +1,5 @@
-const AdminService = require('../models/services/adminServices');
-const Product = require('../models/product');
+const AdminService = require('../models/services/adminService');
+const ProductService = require('../models/services/productService');
 exports.getAdmins = async (req, res, next) => {
   const admins = await AdminService.getAdmins();
   res.render('shop/adminList', {
@@ -44,7 +44,7 @@ exports.addAdmin = async (req, res, next) => {
     console.log(e);
     return res.render('shop/addAdmin', {
       pageTitle: 'Add Admin',
-      categories: await Product.getCategoriesQuantity(),
+      categories: await ProductService.getCategoriesQuantity(),
       user:req.user
     }); //nếu catch đc bất kỳ lỗi nào thì chuyển về
   }
