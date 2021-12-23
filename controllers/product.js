@@ -26,7 +26,9 @@ exports.getProducts = (req, res, next) => {
   Object.keys(filters).forEach(
     key => filters[key] === undefined && delete filters[key]
   );
-
+  Object.keys(filters).forEach(
+    key => filters[key] === null && delete filters[key]
+  );
   const sortBy = req.query.sortBy || 'createdDate';
 
   ProductService.countProducts(filters)

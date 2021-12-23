@@ -1,4 +1,3 @@
-const Product = require('../../models/product');
 const ProductService = require('../../models/services/productService');
 
 exports.getProductsApi = (req, res, next) => {
