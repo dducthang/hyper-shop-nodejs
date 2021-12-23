@@ -3,7 +3,7 @@ const ProductService = require('../../models/services/productService');
 
 exports.getProductsApi = (req, res, next) => {
   const page = +req.query.page || 1;
-  let productsPerPage = +req.query.productsPerPage || 3;
+  let productsPerPage = +req.query.productsPerPage || 12;
   let productsCount;
   const name = req.query.name
     ? { $regex: `.*${req.query.name}.*`, $options: 'i' }

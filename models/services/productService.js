@@ -1,16 +1,16 @@
 const Product = require('../product');
 
-exports.countProducts = (filters) => {
+exports.countProducts = filters => {
   return Product.find(filters).countDocuments();
-}
-exports.getProducts = (filters) => {
+};
+exports.getProducts = filters => {
   return Product.find(filters);
-}
-exports.getProduct = (id) => {
+};
+exports.getProduct = id => {
   return Product.findById(id);
-}
+};
 
-exports.createProduct = (newProduct) => {
+exports.createProduct = newProduct => {
   const product = new Product({
     name: newProduct.name,
     brand: newProduct.brand,
@@ -24,9 +24,9 @@ exports.createProduct = (newProduct) => {
     image: newProduct.image,
   });
   return product.save();
-}
+};
 
-exports.updateProduct = (newProduct) => {
+exports.updateProduct = newProduct => {
   return Product.findById(newProduct.id).then(product => {
     product.name = newProduct.name;
     product.brand = newProduct.brand;
@@ -40,22 +40,68 @@ exports.updateProduct = (newProduct) => {
     if (newProduct.image) product.image = newProduct.image;
     return product.save();
   });
-}
+};
 
- exports.getCategoriesQuantity =  async() =>{
-  let res = [];
-  let cats = [];
-  cats = await Product.distinct('category');
-  for (c of cats) {
-    const quantity = await Product.count({ category: c });
-    res.push({
-      name: c,
-      quantity,
-    });
-  }
-  return res;
-}
+exports.getCategoriesQuantity = async () => {
+  const catsQty = await Product.aggregate([
+    {
+      $group: {
+        _id: '$category',
+        count: { $sum: 1 },
+      },
+    },
+    { $limit: 5 },
+  ]);
+  const sum = await Product.countDocuments();
 
-exports.deleteProduct = (productId) => {
+  //output [{name,quantity}],sum
+  return { catsQty, sum };
+};
+exports.getBrands = async () => {
+  return await Product.aggregate([
+    {
+      $group: {
+        _id: '$brand',
+      },
+    },
+    { $limit: 5 },
+  ]);
+};
+
+exports.getClosureTypes = async () => {
+  return await Product.aggregate([
+    {
+      $group: {
+        _id: '$closureType',
+        count: { $sum: 1 },
+      },
+    },
+    { $limit: 5 },
+  ]);
+};
+exports.getShoesHeights = async () => {
+  return await Product.aggregate([
+    {
+      $group: {
+        _id: '$shoesHeight',
+        count: { $sum: 1 },
+      },
+    },
+    { $limit: 5 },
+  ]);
+};
+exports.getMaterials = async () => {
+  return await Product.aggregate([
+    {
+      $group: {
+        _id: '$material',
+        count: { $sum: 1 },
+      },
+    },
+    { $limit: 5 },
+  ]);
+};
+
+exports.deleteProduct = productId => {
   return Product.findByIdAndRemove(productId);
-}
+};

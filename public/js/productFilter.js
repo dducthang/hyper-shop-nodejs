@@ -7,7 +7,7 @@ $(function () {
   url_string = window.location.href;
   const url = new URL(url_string);
   const category = url.searchParams.get('category');
-  const productsPerPage = url.searchParams.get('productsPerPage');
+  const productsPerPage = url.searchParams.get('productsPerPage') || 12;
   if (category !== null) sessionStorage.setItem('category', category);
   if (productsPerPage !== null)
     sessionStorage.setItem('productsPerPage', productsPerPage);
