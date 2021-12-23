@@ -1,18 +1,19 @@
 <div class="comment">
-    <div class="comment-content extra-small-text">
-        <span>By: &nbsp </span><span><%=comment.owner%></span>
-        <div class="small-text black-color">
-            <%=comment.content%>
-        </div>
-        <div class="divide" style="width:100px;"></div>
-        <input type="text" class="rep-comment" placeholder="Reply comment .....">
-    </div>
+  <div class="comment-content extra-small-text">
+    <span>By: &nbsp </span><span><%=comment.user.name%></span>
+    <div class="small-text black-color"><%=comment.body%></div>
+    <%for(response of responses) { if(response.comment==comment.id){%> <%for(res
+    of response.commentRes){%>
     <div class="comment-response">
-        <div class="arrow"></div>
-        <i class="fas fa-store"></i> &nbsp <span class="extra-small-text red-color">Response from Hyper Shop</span>
-        <div class="small-text black-color">
-            <%=comment.response%>
-        </div>
+      <div class="arrow"></div>
+      <i class="fas fa-store"></i> &nbsp
+      <span class="extra-small-text red-color">Response from Hyper Shop</span>
+      <div class="small-text black-color"><%=res.body%></div>
     </div>
-    <div class="divide"></div>
+    <%}}}%>
+    <div class="divide" style="width: 100px"></div>
+    <input type="text" class="rep-comment" placeholder="Reply comment ....." />
+  </div>
+
+  <div class="divide"></div>
 </div>
