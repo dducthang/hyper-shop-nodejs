@@ -1,18 +1,18 @@
-const ProductService = require("../models/services/productService");
-const multer = require("multer");
-const path = require("path");
-const sharp = require("sharp");
-const fs = require("fs");
+const ProductService = require('../models/services/productService');
+const multer = require('multer');
+const path = require('path');
+const sharp = require('sharp');
+const fs = require('fs');
 
 const storage = multer.memoryStorage();
 
 let upload = multer({
   storage: storage,
-}).single("image");
+}).single('image');
 
 exports.getProducts = (req, res, next) => {
   const page = +req.query.page || 1;
-  let productsPerPage = +req.query.productsPerPage || 3;
+  let productsPerPage = +req.query.productsPerPage || 12;
   let productsCount;
   const filters = {
     category: req.query.category,
@@ -24,15 +24,15 @@ exports.getProducts = (req, res, next) => {
     material: req.query.material,
   };
   Object.keys(filters).forEach(
-    (key) => filters[key] === undefined && delete filters[key]
+    key => filters[key] === undefined && delete filters[key]
   );
 
-  const sortBy = req.query.sortBy || "createdDate";
+  const sortBy = req.query.sortBy || 'createdDate';
 
   ProductService.countProducts(filters)
-    .then((n) => {
+    .then(n => {
       productsCount = n;
-      if (req.query.productsPerPage === "all") {
+      if (req.query.productsPerPage === 'all') {
         productsPerPage = n;
       }
       return ProductService.getProducts(filters)
@@ -41,54 +41,58 @@ exports.getProducts = (req, res, next) => {
         .limit(productsPerPage);
     })
     .then(async function (products) {
-      res.status(200).render("shop/products", {
-        pageTitle: "Products",
+      res.status(200).render('shop/products', {
+        pageTitle: 'Products',
         products,
         productsPerPage,
         productsCount,
         currentPage: page,
         lastPage: Math.ceil(productsCount / productsPerPage),
         categories: await ProductService.getCategoriesQuantity(),
-        user:req.user
+        brands: await ProductService.getBrands(),
+        closureTypes: await ProductService.getClosureTypes(),
+        shoesHeights: await ProductService.getShoesHeights(),
+        materials: await ProductService.getMaterials(),
+        user: req.user,
       });
     });
 };
 
 exports.getProductDetail = (req, res, next) => {
   const productId = req.params.productId;
-  ProductService.getProduct(productId).then((product) => {
-    res.status(200).render("shop/productDetail", {
-      pageTitle: "Product detail",
-      bannerText: "Product",
+  ProductService.getProduct(productId).then(product => {
+    res.status(200).render('shop/productDetail', {
+      pageTitle: 'Product detail',
+      bannerText: 'Product',
       product: product,
       comments: [
         {
-          owner: "thang dang is the best",
-          content: "this is the best shoe that i have ever owned",
-          response: "Thank you for your feedback. This is our pleasure",
+          owner: 'thang dang is the best',
+          content: 'this is the best shoe that i have ever owned',
+          response: 'Thank you for your feedback. This is our pleasure',
         },
         {
-          owner: "thang dang is the best",
-          content: "this is the best shoe that i have ever owned",
-          response: "Thank you for your feedback. This is our pleasure",
+          owner: 'thang dang is the best',
+          content: 'this is the best shoe that i have ever owned',
+          response: 'Thank you for your feedback. This is our pleasure',
         },
         {
-          owner: "thang dang is the best",
-          content: "this is the best shoe that i have ever owned",
-          response: "Thank you for your feedback. This is our pleasure",
+          owner: 'thang dang is the best',
+          content: 'this is the best shoe that i have ever owned',
+          response: 'Thank you for your feedback. This is our pleasure',
         },
       ],
-      user: req.user
+      user: req.user,
     });
   });
 };
 
 exports.getAddProduct = (req, res, next) => {
-  res.status(200).render("shop/addProduct", {
-    pageTitle: "Add product",
+  res.status(200).render('shop/addProduct', {
+    pageTitle: 'Add product',
     error: null,
-    product:{},
-    user: req.user
+    product: {},
+    user: req.user,
   });
 };
 
@@ -121,7 +125,10 @@ exports.getAddProduct = (req, res, next) => {
 // };
 
 exports.postAddProduct = (req, res, next) => {
-  upload(req, res, (err = async () => {
+  upload(
+    req,
+    res,
+    (err = async () => {
       const product = {
         name: req.body.productName,
         brand: req.body.brand,
@@ -133,30 +140,29 @@ exports.postAddProduct = (req, res, next) => {
         material: req.body.material,
         category: req.body.category,
       };
-      
+
       const checktype = req.file.mimetype;
-      if (!checktype.includes("image")){
-        res.status(400).render("shop/addProduct", {
+      if (!checktype.includes('image')) {
+        res.status(400).render('shop/addProduct', {
           product: product,
-          pageTitle: "Add product",
-          error: "Type of image file is not appropriate"
+          pageTitle: 'Add product',
+          error: 'Type of image file is not appropriate',
         });
-        
-      }else{
-        product.image= "/img/" + req.file.originalname,
-        await sharp(req.file.buffer)
-          .resize({
-            width: 592,
-            height: 592,
-          })
-          .toFile("./public/img/" + req.file.originalname);
-  
-        ProductService.createProduct(product).then((result) => {
-          console.log("Created product");
-          res.status(200).render("shop/addProduct", {
-            pageTitle: "Add product",
+      } else {
+        (product.image = '/img/' + req.file.originalname),
+          await sharp(req.file.buffer)
+            .resize({
+              width: 592,
+              height: 592,
+            })
+            .toFile('./public/img/' + req.file.originalname);
+
+        ProductService.createProduct(product).then(result => {
+          console.log('Created product');
+          res.status(200).render('shop/addProduct', {
+            pageTitle: 'Add product',
             error: null,
-            product: null
+            product: null,
           });
         });
       }
@@ -166,19 +172,22 @@ exports.postAddProduct = (req, res, next) => {
 
 exports.getEditProduct = (req, res, next) => {
   const productId = req.params.productId;
-  ProductService.getProduct(productId).then((product) => {
-    res.status(200).render("shop/editProduct", {
+  ProductService.getProduct(productId).then(product => {
+    res.status(200).render('shop/editProduct', {
       product: product,
-      pageTitle: "Edit product",
+      pageTitle: 'Edit product',
       error: null,
-      user: req.user
+      user: req.user,
     });
   });
 };
 
 exports.postEditProduct = (req, res, next) => {
-  upload(req, res, (err = async () => {
-    console.log()
+  upload(
+    req,
+    res,
+    (err = async () => {
+      console.log();
       const product = {
         id: req.body.productId,
         name: req.body.productName,
@@ -191,34 +200,34 @@ exports.postEditProduct = (req, res, next) => {
         material: req.body.material,
         category: req.body.category,
       };
-      
-      if (req.file){
+
+      if (req.file) {
         const checktype = req.file.mimetype;
-        if(checktype.includes('image')) {
-          product.image = "/img/" + req.file.originalname;
-  
+        if (checktype.includes('image')) {
+          product.image = '/img/' + req.file.originalname;
+
           await sharp(req.file.buffer)
             .resize({
               width: 592,
               height: 592,
             })
-            .toFile("./public/img/" + req.file.originalname);
+            .toFile('./public/img/' + req.file.originalname);
         }
-        if (!checktype.includes("image")){
+        if (!checktype.includes('image')) {
           res.status(400).render(`shop/editProduct`, {
             product: product,
-            pageTitle: "Edit product",
-            error: "Type of image file is not appropriate"
+            pageTitle: 'Edit product',
+            error: 'Type of image file is not appropriate',
           });
-          return ;
+          return;
         }
       }
       ProductService.updateProduct(product)
-        .then((result) => {
-          console.log("UPDATED PRODUCT");
-          res.status(201).redirect("/products");
+        .then(result => {
+          console.log('UPDATED PRODUCT');
+          res.status(201).redirect('/products');
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     })
   );
 };
@@ -227,8 +236,8 @@ exports.postDeleteProduct = (req, res, next) => {
   const productId = req.body.productId;
   ProductService.deleteProduct(productId)
     .then(() => {
-      console.log("DELETED PRODUCT");
-      res.status(200).redirect("/products");
+      console.log('DELETED PRODUCT');
+      res.status(200).redirect('/products');
     })
-    .catch((err) => console.log(err));
+    .catch(err => console.log(err));
 };
