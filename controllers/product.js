@@ -66,17 +66,16 @@ exports.getProducts = (req, res, next) => {
 exports.getProductDetail = async (req, res, next) => {
   const productId = req.params.productId;
   const comments = await CommentService.getProductComments(productId);
-
   const responses = await ResponseService.getResponses(comments);
-  ProductService.getProduct(productId).then(product => {
-    res.status(200).render('shop/productDetail', {
-      pageTitle: 'Product detail',
-      bannerText: 'Product',
-      product: product,
-      comments,
-      responses,
-      user: req.user,
-    });
+  const product = await ProductService.getProduct(productId);
+  
+  return res.status(200).render('shop/productDetail', {
+    pageTitle: 'Product detail',
+    bannerText: 'Product',
+    product: product,
+    comments,
+    responses,
+    user: req.user,
   });
 };
 

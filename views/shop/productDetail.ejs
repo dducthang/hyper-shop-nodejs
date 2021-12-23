@@ -118,7 +118,7 @@
         <% if (comments.length> 0) { %>
             <% for (comment of comments){ %>
                 <!-- <span></span> -->
-                <%- include('../includes/comment', {comment:comment}) %> 
+                <%- include('../includes/comment', {comment}) %> 
                
             <% } %>
         <% } %>
@@ -126,7 +126,7 @@
 
 
     <%- include('../includes/foot')%>
-
+    <script src="/ajax/response-ajax.js"></script>
     
 </body>
 </html>

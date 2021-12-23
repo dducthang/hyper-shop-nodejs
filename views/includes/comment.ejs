@@ -2,17 +2,31 @@
   <div class="comment-content extra-small-text">
     <span>By: &nbsp </span><span><%=comment.user.name%></span>
     <div class="small-text black-color"><%=comment.body%></div>
-    <%for(response of responses) { if(response.comment==comment.id){%> <%for(res
-    of response.commentRes){%>
-    <div class="comment-response">
-      <div class="arrow"></div>
-      <i class="fas fa-store"></i> &nbsp
-      <span class="extra-small-text red-color">Response from Hyper Shop</span>
-      <div class="small-text black-color"><%=res.body%></div>
+    <div class="comments-reponse">
+      <%for(response of responses) { if(response.comment==comment.id){%>
+      <%for(res of response.commentRes){%>
+      <div class="comment-response">
+        <div class="arrow"></div>
+        <i class="fas fa-store"></i> &nbsp
+        <span class="extra-small-text red-color">Response from Hyper Shop</span>
+        <div class="small-text black-color"><%=res.body%></div>
+      </div>
+      <div class="divide" style="width: 100px"></div>
+      <%}}}%>
     </div>
-    <%}}}%>
-    <div class="divide" style="width: 100px"></div>
-    <input type="text" class="rep-comment" placeholder="Reply comment ....." />
+    <form
+      class="response-form"
+      action="/api/response/<%=comment.id%>"
+      method="post"
+    >
+      <input
+        type="text"
+        class="rep-comment"
+        name="response"
+        placeholder="Reply comment ....."
+      />
+      <button class="hidden"></button>
+    </form>
   </div>
 
   <div class="divide"></div>
