@@ -1,10 +1,13 @@
-const ProductService = require('../models/services/productService');
 const multer = require('multer');
 const path = require('path');
 const sharp = require('sharp');
 const fs = require('fs');
 
 const storage = multer.memoryStorage();
+
+const ProductService = require('../models/services/productService');
+const CommentService = require('../models/services/commentService');
+const ResponseService = require('../models/services/responseService');
 
 let upload = multer({
   storage: storage,
@@ -60,30 +63,18 @@ exports.getProducts = (req, res, next) => {
     });
 };
 
-exports.getProductDetail = (req, res, next) => {
+exports.getProductDetail = async (req, res, next) => {
   const productId = req.params.productId;
+  const comments = await CommentService.getProductComments(productId);
+
+  const responses = await ResponseService.getResponses(comments);
   ProductService.getProduct(productId).then(product => {
     res.status(200).render('shop/productDetail', {
       pageTitle: 'Product detail',
       bannerText: 'Product',
       product: product,
-      comments: [
-        {
-          owner: 'thang dang is the best',
-          content: 'this is the best shoe that i have ever owned',
-          response: 'Thank you for your feedback. This is our pleasure',
-        },
-        {
-          owner: 'thang dang is the best',
-          content: 'this is the best shoe that i have ever owned',
-          response: 'Thank you for your feedback. This is our pleasure',
-        },
-        {
-          owner: 'thang dang is the best',
-          content: 'this is the best shoe that i have ever owned',
-          response: 'Thank you for your feedback. This is our pleasure',
-        },
-      ],
+      comments,
+      responses,
       user: req.user,
     });
   });
