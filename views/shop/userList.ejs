@@ -32,8 +32,8 @@
 						</div>
 					</div>
 					<div class="user-list">
-                        <% for (let i=0;i<10;i++){%>
-                            <%- include('../includes/userList/userBox')%>
+                        <% for (let i=0;i<userList.length;i++){%>
+                            <%- include('../includes/userList/userBox', {user: userList[i]}) %>
                             <div class="divide"></div>
                         <% } %>
                     </div>
@@ -41,15 +41,39 @@
 				<div class="pages">
 					<p class="loadMore"><a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a></p>
 					<nav aria-label="Page navigation example" class="d-flex justify-content-center">
-					  <ul class="pagination">
-						<li class="page-item"><a href="#" aria-label="Previous" class="page-link"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
-						<li class="page-item active"><a href="#" class="page-link">1</a></li>
-						<li class="page-item"><a href="#" class="page-link">2</a></li>
-						<li class="page-item"><a href="#" class="page-link">3</a></li>
-						<li class="page-item"><a href="#" class="page-link">4</a></li>
-						<li class="page-item"><a href="#" class="page-link">5</a></li>
-						<li class="page-item"><a href="#" aria-label="Next" class="page-link"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
-					  </ul>
+						<div class="pages">
+					
+							<nav
+							aria-label="Page navigation example"
+							class="d-flex justify-content-center"
+						  >
+							<% if (lastPage > 0) { %>
+							<ul class="pagination custom-hover">
+							  <li class="page-item custom-hover "><a class="page-link">First</a></li>
+
+							  <% let i = (Number(currentPage) > 5 ? Number(currentPage) - 4 : 1) %> <%
+							  if (i !== 1) { %>
+							  <li class="page-item custom-hover"><a class="page-link">...</a></li>
+							  <% } %> <% for (; i <= (Number(currentPage) + 4) && i <= lastPage; i++)
+							  { %> <% if (i == currentPage) { %>
+							  <li class="page-item custom-hover active"><a href="/users?page= <%= i %>" class="page-link"><%= i %></a></li>
+							  <% } else { %>
+							  <li class="page-item custom-hover">
+								<a href="/users?page=<%= i %>" class="page-link"><%= i %></a>
+							  </li>
+							  <% } %> <% if (i == Number(currentPage) + 4 && i < lastPage) { %>
+							  <li class="page-item custom-hover"><a class="page-link">...</a></li>
+							  <% } %> <% } %> <% if (currentPage == lastPage) { %>
+							  <li class="page-item custom-hover"><a class="page-link">Last</a></li>
+							  <% } else { %>
+							  <li>
+								<a class="page-link">Last</a>
+							  </li>
+							  <% } %>
+							</ul>
+							<% } %>
+						  </nav>
+						</div>
 					</nav>
 				</div>
 			</div>
