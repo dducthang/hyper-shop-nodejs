@@ -9,7 +9,6 @@ exports.getAdmins = async (req, res, next) => {
   });
 };
 
-
 exports.getProfile = (req, res, next) => {
   res.status(200).render("shop/profile", {
     pageTitle: "Profile",
