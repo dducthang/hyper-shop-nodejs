@@ -1,16 +1,18 @@
 <div class="user-box">
-    <div class="user-info">
-        <div class="user-id">
-            <span>123</span>
-        </div>
-        <div class="user-description">
-            dang duc thang 
-        </div>
+  <div class="user-info">
+    <div class="user-id">
+      <span><%= user.email %></span>
     </div>
-    <div class="actions">
-        <a href="/userDetail">
-            <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"style="margin-right: 5px;"></i>Detail</button>
-        </a>
-        <button class="btn btn-danger btn-sm"><i class="fas fa-times" style="margin-right: 5px;"></i>Block</button>
-    </div>
+    <div class="user-description"><%= user.name %></div>
+  </div>
+  <div class="actions">
+    <a href="/userDetail">
+      <button class="btn btn-default btn-sm btn-primary">
+        <i class="fa fa-pencil" style="margin-right: 5px"></i>Detail
+      </button>
+    </a>
+    <button class="btn btn-danger btn-sm">
+      <i class="fas fa-times" style="margin-right: 5px"></i>Block
+    </button>
+  </div>
 </div>
