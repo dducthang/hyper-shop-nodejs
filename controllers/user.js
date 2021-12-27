@@ -28,3 +28,4 @@ exports.getUserDetail = (req, res, next) => {
     user: req.user,
   });
 };
+
