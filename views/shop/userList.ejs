@@ -56,10 +56,10 @@
 							  <li class="page-item custom-hover"><a class="page-link">...</a></li>
 							  <% } %> <% for (; i <= (Number(currentPage) + 4) && i <= lastPage; i++)
 							  { %> <% if (i == currentPage) { %>
-							  <li class="page-item custom-hover active"><a href="/users?page= <%= i %>" class="page-link"><%= i %></a></li>
+							  <li class="page-item custom-hover active"><a class="page-link"><%= i %></a></li>
 							  <% } else { %>
 							  <li class="page-item custom-hover">
-								<a href="/users?page=<%= i %>" class="page-link"><%= i %></a>
+								<a class="page-link"><%= i %></a>
 							  </li>
 							  <% } %> <% if (i == Number(currentPage) + 4 && i < lastPage) { %>
 							  <li class="page-item custom-hover"><a class="page-link">...</a></li>
@@ -83,5 +83,6 @@
 	</section>
 
     <%- include('../includes/foot')%>
+    <script src="/ajax/user-ajax.js"></script>
 </body>
 </html>
