@@ -9,14 +9,11 @@ exports.getAdmins = async (req, res, next) => {
   });
 };
 
-exports.getProfile = async (req, res, next) => {
-  console.log(req.user);
+
+exports.getProfile = (req, res, next) => {
   res.status(200).render("shop/profile", {
     pageTitle: "Profile",
-    categories: await ProductService.getCategoriesQuantity(),
-    brands: await ProductService.getBrands(),
-    profile: req.user,
-    user: true,
+    user: req.user,
   });
 };
 
@@ -26,7 +23,8 @@ exports.postProfile = async (req, res, next) => {
   if (!name || !phone || !address) {
     errors.push({ msg: "Please enter all fields" });
   }
-  if (phone.length != 10) {
+  var phoneRegerx = /([0][1-9]{9})/;
+  if (!phoneRegerx.test(phone)) {
     errors.push({ msg: "Phone number need to be 10-digit format" });
   }
   if (errors.length > 0) {
