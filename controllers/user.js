@@ -1,7 +1,7 @@
 const UserService = require("../models/services/userService");
 const User = require("../models/user");
 exports.getUserList = async (req, res, next) => {
-  const ITEMS_PER_PAGE = 3;
+  const ITEMS_PER_PAGE = 2;
   let page = +req.query.page || 1;
 
   const totalUsers = await User.find().countDocuments();
@@ -22,9 +22,11 @@ exports.getUserList = async (req, res, next) => {
   });
 };
 
-exports.getUserDetail = (req, res, next) => {
+exports.getUserDetail = async (req, res, next) => {
+  const userId = req.params.userId;
+  const user = await UserService.getUser({ _id: userId });
   res.status(200).render("shop/userDetail", {
     pageTitle: "User Profile",
-    user: req.user,
+    user,
   });
 };
