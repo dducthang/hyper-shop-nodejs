@@ -10,10 +10,10 @@
   margin-bottom: 30px;
 }
 
-.error{
+.error {
   font-size: 20px;
   font-weight: 500;
-  color:orange;
+  color: orange;
 }
 
 /* ============================= SHOP ================================*/
@@ -156,7 +156,7 @@
 
 /* pagination ==================== */
 
-.custom-hover:hover{
+.custom-hover:hover {
   cursor: pointer;
 }
 .pages {
@@ -189,8 +189,8 @@
   border: 1px solid #00bba7;
   outline: none;
 }
-.edd_cart_actions input[type='number']::-webkit-inner-spin-button,
-.edd_cart_actions input[type='number']::-webkit-outer-spin-button {
+.edd_cart_actions input[type="number"]::-webkit-inner-spin-button,
+.edd_cart_actions input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
@@ -260,7 +260,6 @@
 .box-footer-btn {
   width: 200px;
   margin: 0 10px;
-
 }
 
 /* ============================= USER LIST ================================ */
@@ -277,7 +276,7 @@
   align-items: center;
 }
 
-.user-id {
+.user-email {
   padding: 0 5px;
   margin: 5px;
   margin-left: 5px;
@@ -288,7 +287,7 @@
 }
 
 /* ===================================== USER PROFILE ==================================== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 .wrapper-profile {
   padding: 30px 50px;

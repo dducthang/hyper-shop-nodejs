@@ -29,16 +29,13 @@
             </div>
             <div class="py-2">
                 <div class="row py-2">
-                    <div class="col-md-6"> <label for="firstname">First Name</label> <input readonly type="text"
-                            class="bg-light form-control" placeholder="Steve"> </div>
-                    <div class="col-md-6 pt-md-0 pt-3"> <label for="lastname">Last Name</label> <input readonly type="text"
-                            class="bg-light form-control" placeholder="Smith"> </div>
+    
+                    <div class="col-md-6"> <label for="firstname">Name</label> <input readonly type="text" class="bg-light form-control" name="name" value="<%= user.name %>"> </div>
+                    <div class="col-md-6 pt-md-0 pt-3"> <label for="lastname">Address</label> <input readonly type="text" class="bg-light form-control" name="address" value="<%= user.address %>"> </div>
                 </div>
                 <div class="row py-2">
-                    <div class="col-md-6"> <label for="email">Email Address</label> <input readonly type="text"
-                            class="bg-light form-control" placeholder="steve_@email.com"> </div>
-                    <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">Phone Number</label> <input readonly type="tel"
-                            class="bg-light form-control" placeholder="+1 213-548-6015"> </div>
+                    <div class="col-md-6"> <label for="email">Email Address</label> <input readonly type="text" class="bg-light form-control" name="email" value="<%= user.email %>"> </div>
+                    <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">Phone Number</label> <input readonly type="tel" class="bg-light form-control" name="phone" value="<%= user.phone %>"> </div>
                 </div>
             </div>
             <div class="center" style="margin-top: 10px; margin-bottom: 0px">
@@ -47,7 +44,7 @@
             </div>
         </div>
         <div class="center">
-            <a href="/userList">
+            <a href="/users">
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-chevron-left"></i>&nbsp; Back to User list 
                 </button>
