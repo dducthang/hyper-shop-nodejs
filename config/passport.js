@@ -9,6 +9,7 @@ function initialize(passport) {
     const user = await authServices.getUserLean({ email });
     if (!user) return done(null, false, { message: "Email not exists" });
     if (!user.isAdmin) return done(nulll, false, { message: "Not an admin" });
+
     try {
       if (await bcrypt.compare(password, user.password)) {
         const hashPassword = await bcrypt.hash(password, 10);

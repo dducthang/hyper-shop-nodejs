@@ -15,13 +15,14 @@ $(".pages").on("click", ".page-link", function () {
       //xử lí data gửi về
       let userList = "";
       let userBox;
+      let i = 1;
       users.forEach((user) => {
-        userBox = getUserBox(user);
+        userBox = getUserBox(user, i++);
         userList += userBox;
       });
       const pagesNumber = getPagesNumber(lastPage, page); //paging number ở dưới
       //xử lí data gửi về
-      $(".user-list").html(userList);
+      $("table tbody").html(userList);
       $(".pages").html(pagesNumber);
     },
     error: function (error) {
@@ -29,29 +30,74 @@ $(".pages").on("click", ".page-link", function () {
     },
   });
 });
-function getUserBox(user) {
-  return `<div class="user-box">
-  <div class="user-info">
-    <div class="user-email" width>
-      <span>${user.email}</span>
-    </div>
-    <div class="user-description">${user.name}</div>
-  </div>
-  <div class="actions">
-    <a href="/users/${user._id}">
-      <button class="btn btn-default btn-sm btn-primary">
-        <i class="fa fa-pencil" style="margin-right: 5px"></i>Detail
-      </button>
-    </a>
-    <button class="btn btn-danger btn-sm">
-      <i class="fas fa-times" style="margin-right: 5px"></i>Block
-    </button>
-  </div>
-</div>
-<div class="divide"></div>
+function getUserBox(user, number) {
+  return `<tr>
+  <th scope="row">${number}</th>
+  <td>${user.name}</td>
+  <td>${user.email}</td>
+  <td>
+  ${
+    !user.isLock
+      ? `<button id="${user._id}" class="btn btn-danger btn-sm AcctionOnUserBtn">Block</button>`
+      : `<button id="${user._id}" class="btn btn-success btn-sm AcctionOnUserBtn">Unblock</button>`
+  }
+
+    </td>      
+  <td>
+<a class="btn btn-primary" href="/users/${user._id}">
+    Details
+</a>
+    </td>
+</tr>
+<% } %>
+
+<script>
+for (let btn of document.getElementsByClassName("AcctionOnUserBtn")) {
+  btn.addEventListener("click", ActionOnUserHandler);
+}
+</script>
 `;
 }
+// $(".AcctionOnUserBtn").on("click", ActionOnUserHandler);
+for (let btn of document.getElementsByClassName("AcctionOnUserBtn")) {
+  btn.addEventListener("click", ActionOnUserHandler);
+}
+function ActionOnUserHandler(e) {
+  e.preventDefault();
 
+  //đổi trạng thái nút block hoặc unblock
+  $(this).text() === "Block" ? $(this).text("Unblock") : $(this).text("Block");
+  $.ajax({
+    url: "http://localhost:4000/api/users",
+    type: "POST",
+    data: {
+      userId: $(this).attr("id"),
+    },
+    dataType: "json",
+    success: function (data) {
+      console.log(data.msg);
+      //thay đổi nút button
+      // const { users, page, lastPage } = data;
+      // console.log(data);
+      // //xử lí data gửi về
+      // let userList = "";
+      // let userBox;
+      // let i = 1;
+      // users.forEach((user) => {
+      //   userBox = getUserBox(user, i++);
+      //   userList += userBox;
+      // });
+      // const pagesNumber = getPagesNumber(lastPage, page); //paging number ở dưới
+      // //xử lí data gửi về
+      // $("table tbody").html(userList);
+      // $(".pages").html(pagesNumber);
+    },
+    error: function (error) {
+      console.log(error);
+    },
+  });
+  // alert("Block");
+}
 function getPagesNumber(lastPage, page) {
   let res = `
 <nav
