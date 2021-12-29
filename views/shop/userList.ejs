@@ -32,10 +32,41 @@
 						</div>
 					</div>
 					<div class="user-list">
-                        <% for (let i=0;i<userList.length;i++){%>
-                            <%- include('../includes/userList/userBox', {user: userList[i]}) %>
-                            <div class="divide"></div>
-                        <% } %>
+						<table class="table table-striped">
+							<thead>
+							  <tr>
+							    <th scope="col">#</th>
+							    <th scope="col">Name</th>
+							    <th scope="col">Email</th>
+							    <th scope="col">Action</th>
+							    <th scope="col">Detail</th>
+							  </tr>
+							</thead>
+							<tbody>
+							<%let count = 0%>
+							<% for(user of userList) { %>
+							  <tr>
+							    <th scope="row"><%=count+=1 %></th>
+							    <td><%= user.name %></td>
+							    <td><%= user.email %></td>
+							    <td>
+								<form action="/users/action/<%=user._id %>" method="POST">
+								<% if(!user.isLock){ %>
+									<button id="<%= user._id %>" class="btn btn-danger btn-sm AcctionOnUserBtn">Block</button>
+								<% }else{ %>
+									<button id="<%= user._id %>" class="btn btn-success btn-sm AcctionOnUserBtn">Unblock</button>
+								<% }%>
+								</form>
+							      </td>      
+							    <td>
+								<a class="btn btn-primary" href="/users/<%=user._id %>">
+								    Details
+								</a>
+							      </td>
+							  </tr>
+							  <% } %>
+							</tbody>
+						        </table>
                     </div>
 				</div>
 				<div class="pages">

@@ -9,5 +9,6 @@ router.get("/products", productsApiController.getProductsApi);
 router.post("/response/:commentId", responseApiController.postResponse);
 
 router.get("/users", usersApiController.getUsersApi);
+router.post("/users", usersApiController.postActionUser);
 
 module.exports = router;

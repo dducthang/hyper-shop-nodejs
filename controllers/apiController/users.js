@@ -18,3 +18,11 @@ exports.getUsersApi = async (req, res, next) => {
     lastPage: Math.ceil(usersCount / ITEMS_PER_PAGE),
   });
 };
+
+exports.postActionUser = async (req, res, next) => {
+  console.log(req.body.userId);
+  console.log(await UserService.Block_Unblock(req.body.userId));
+  res.status(200).send({
+    msg: "appiiiiiiiiiiiiiiiiiii",
+  });
+};

@@ -5,7 +5,7 @@ exports.getUserList = async (req, res, next) => {
   let page = +req.query.page || 1;
 
   const totalUsers = await User.find().countDocuments();
-  const userList = await User.find()
+  const userList = await User.find({ isAdmin: 0 })
     .skip((page - 1) * ITEMS_PER_PAGE)
     .limit(ITEMS_PER_PAGE);
   res.status(200).render("shop/userList", {
