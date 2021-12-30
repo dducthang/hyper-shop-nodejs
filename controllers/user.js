@@ -1,6 +1,6 @@
 const UserService = require("../models/services/userService");
 exports.getUserList = async (req, res, next) => {
-  const ITEMS_PER_PAGE = 2;
+  const ITEMS_PER_PAGE = 10;
   let page = +req.query.page || 1;
 
   const totalUsers = await UserService.getUsers({

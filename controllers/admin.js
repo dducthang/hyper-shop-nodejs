@@ -23,7 +23,7 @@ exports.postProfile = async (req, res, next) => {
   if (!name || !phone || !address) {
     errors.push({ msg: "Please enter all fields" });
   }
-  var phoneRegerx = /([0][1-9]{9})/;
+  var phoneRegerx = /^([0][1-9]{9})$/;
   if (!phoneRegerx.test(phone)) {
     errors.push({ msg: "Phone number need to be 10-digit format" });
   }
@@ -86,8 +86,7 @@ exports.addAdmin = async (req, res, next) => {
 };
 
 exports.getAdminList = async (req, res, next) => {
-  console.log("------------");
-  const ITEMS_PER_PAGE = 2;
+  const ITEMS_PER_PAGE = 10;
   let page = +req.query.page || 1;
 
   const totalUsers = await UserService.getUsers({

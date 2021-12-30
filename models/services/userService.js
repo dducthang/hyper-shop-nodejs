@@ -14,6 +14,5 @@ exports.getUsersApi = (filter) => {
 exports.Block_Unblock = async (_id) => {
   const user = await User.findById(_id);
   user.isLock = user.isLock ? "false" : "true";
-  console.log(user);
   return user.save();
 };

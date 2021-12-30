@@ -12,7 +12,6 @@ $(".pages").on("click", ".page-link", function () {
     dataType: "json",
     success: function (data) {
       const { users, page, lastPage } = data;
-      console.log(data);
       //xử lí data gửi về
       let userList = "";
       let userBox;
@@ -39,8 +38,8 @@ function getUserBox(user, number) {
   <td>
   ${
     !user.isLock
-      ? `<button id="${user._id}" class="btn btn-danger btn-sm AcctionOnUserBtn">Block</button>`
-      : `<button id="${user._id}" class="btn btn-success btn-sm AcctionOnUserBtn">Unblock</button>`
+      ? `<button id="${user._id}" class="btn btn-danger btn-sm ActionOnUserBtn">Block</button>`
+      : `<button id="${user._id}" class="btn btn-success btn-sm ActionOnUserBtn">Unblock</button>`
   }
 
     </td>      
@@ -53,7 +52,7 @@ function getUserBox(user, number) {
 <% } %>
 
 <script>
-for (let btn of document.getElementsByClassName("AcctionOnUserBtn")) {
+for (let btn of document.getElementsByClassName("ActionOnUserBtn")) {
   btn.addEventListener("click", ActionOnUserHandler);
 }
 </script>
@@ -61,14 +60,23 @@ for (let btn of document.getElementsByClassName("AcctionOnUserBtn")) {
 }
 
 //khóa mở người dùng
-for (let btn of document.getElementsByClassName("AcctionOnUserBtn")) {
+for (let btn of document.getElementsByClassName("ActionOnUserBtn")) {
   btn.addEventListener("click", ActionOnUserHandler);
 }
 function ActionOnUserHandler(e) {
   e.preventDefault();
 
   //đổi trạng thái nút block hoặc unblock
-  $(this).text() === "Block" ? $(this).text("Unblock") : $(this).text("Block");
+  if ($(this).text() === "Block") {
+    $(this).text("Unblock");
+    $(this).removeClass("btn-danger");
+    $(this).addClass("btn-success");
+  } else {
+    $(this).text("Block");
+    $(this).removeClass("btn-success");
+    $(this).addClass("btn-danger");
+  }
+
   $.ajax({
     url: "http://localhost:4000/api/users",
     type: "POST",
