@@ -1,11 +1,12 @@
 const UserService = require("../models/services/userService");
-const User = require("../models/user");
 exports.getUserList = async (req, res, next) => {
   const ITEMS_PER_PAGE = 2;
   let page = +req.query.page || 1;
 
-  const totalUsers = await User.find().countDocuments();
-  const userList = await User.find({ isAdmin: 0 })
+  const totalUsers = await UserService.getUsers({
+    isAdmin: 0,
+  }).countDocuments();
+  const userList = await UserService.getUsers({ isAdmin: 0 })
     .skip((page - 1) * ITEMS_PER_PAGE)
     .limit(ITEMS_PER_PAGE);
   res.status(200).render("shop/userList", {

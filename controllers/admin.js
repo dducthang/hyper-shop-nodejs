@@ -1,5 +1,6 @@
 const AdminService = require("../models/services/adminService");
 const ProductService = require("../models/services/productService");
+const UserService = require("../models/services/userService");
 exports.getAdmins = async (req, res, next) => {
   const admins = await AdminService.getAdmins();
   res.status(200).render("shop/adminList", {
@@ -82,4 +83,29 @@ exports.addAdmin = async (req, res, next) => {
     }); //nếu catch đc bất kỳ lỗi nào thì chuyển về
   }
   return res.status(201).redirect("/admins");
+};
+
+exports.getAdminList = async (req, res, next) => {
+  console.log("------------");
+  const ITEMS_PER_PAGE = 2;
+  let page = +req.query.page || 1;
+
+  const totalUsers = await UserService.getUsers({
+    isAdmin: 1,
+  }).countDocuments();
+  const userList = await UserService.getUsers({ isAdmin: 1 })
+    .skip((page - 1) * ITEMS_PER_PAGE)
+    .limit(ITEMS_PER_PAGE);
+  res.status(200).render("shop/adminList", {
+    pageTitle: "User list",
+    user: req.user,
+    userList,
+    totalUsers,
+    currentPage: page,
+    hasNextPage: totalUsers > page * ITEMS_PER_PAGE,
+    hasPreviousPage: page > 1,
+    nextPage: page + 1,
+    previousPage: page - 1,
+    lastPage: Math.ceil(totalUsers / ITEMS_PER_PAGE),
+  });
 };

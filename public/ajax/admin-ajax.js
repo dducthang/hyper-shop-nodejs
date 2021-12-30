@@ -6,7 +6,7 @@ $(".pages").on("click", ".page-link", function () {
     type: "GET",
     data: {
       page,
-      isAdmin: 0,
+      isAdmin: 1,
       // pagelimit: 2,
     },
     dataType: "json",
@@ -33,31 +33,31 @@ $(".pages").on("click", ".page-link", function () {
 });
 function getUserBox(user, number) {
   return `<tr>
-  <th scope="row">${number}</th>
-  <td>${user.name}</td>
-  <td>${user.email}</td>
-  <td>
-  ${
-    !user.isLock
-      ? `<button id="${user._id}" class="btn btn-danger btn-sm AcctionOnUserBtn">Block</button>`
-      : `<button id="${user._id}" class="btn btn-success btn-sm AcctionOnUserBtn">Unblock</button>`
-  }
-
-    </td>      
-  <td>
-<a class="btn btn-primary" href="/users/${user._id}">
-    Details
-</a>
-    </td>
-</tr>
-<% } %>
-
-<script>
-for (let btn of document.getElementsByClassName("AcctionOnUserBtn")) {
-  btn.addEventListener("click", ActionOnUserHandler);
-}
-</script>
-`;
+          <th scope="row">${number}</th>
+          <td>${user.name}</td>
+          <td>${user.email}</td>
+          <td>
+          ${
+            !user.isLock
+              ? `<button id="${user._id}" class="btn btn-danger btn-sm AcctionOnUserBtn">Block</button>`
+              : `<button id="${user._id}" class="btn btn-success btn-sm AcctionOnUserBtn">Unblock</button>`
+          }
+        
+            </td>      
+          <td>
+        <a class="btn btn-primary" href="/users/${user._id}">
+            Details
+        </a>
+            </td>
+        </tr>
+        <% } %>
+        
+        <script>
+        for (let btn of document.getElementsByClassName("AcctionOnUserBtn")) {
+          btn.addEventListener("click", ActionOnUserHandler);
+        }
+        </script>
+        `;
 }
 
 //khóa mở người dùng
@@ -86,10 +86,10 @@ function ActionOnUserHandler(e) {
 }
 function getPagesNumber(lastPage, page) {
   let res = `
-<nav
-  aria-label="Page navigation example"
-  class="d-flex justify-content-center"
->`;
+        <nav
+          aria-label="Page navigation example"
+          class="d-flex justify-content-center"
+        >`;
   if (lastPage > 0) {
     res += `<ul class="pagination"><li class="page-item custom-hover"><a class="page-link">First</a></li>`;
     let i = Number(page) > 5 ? Number(page) - 4 : 1;
@@ -107,8 +107,8 @@ function getPagesNumber(lastPage, page) {
       }
     }
     res += `<li class="page-item custom-hover">
-  <a class="page-link">Last</a>
-</li>`;
+          <a class="page-link">Last</a>
+        </li>`;
     res += `</ul>`;
   }
 

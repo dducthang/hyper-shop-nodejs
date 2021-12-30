@@ -50,13 +50,11 @@
 							    <td><%= user.name %></td>
 							    <td><%= user.email %></td>
 							    <td>
-								<form action="/users/action/<%=user._id %>" method="POST">
 								<% if(!user.isLock){ %>
 									<button id="<%= user._id %>" class="btn btn-danger btn-sm AcctionOnUserBtn">Block</button>
 								<% }else{ %>
 									<button id="<%= user._id %>" class="btn btn-success btn-sm AcctionOnUserBtn">Unblock</button>
 								<% }%>
-								</form>
 							      </td>      
 							    <td>
 								<a class="btn btn-primary" href="/users/<%=user._id %>">
