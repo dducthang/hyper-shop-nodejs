@@ -10,6 +10,9 @@ router.get("/", adminController.getAdminList);
 router.get("/profile", adminController.getProfile);
 router.post("/profile", adminController.postProfile);
 
+router.get("/updatepassword", adminController.getUpdatePassword);
+router.post("/updatepassword", adminController.postUpdatePassword);
+
 router.get("/add", adminController.getAddAdmin);
 router.post("/add", adminController.addAdmin);
 router.get("/:id([0-9a-fA-F]{24})", adminController.getAdmin);

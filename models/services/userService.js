@@ -1,4 +1,5 @@
 const User = require("../user");
+const bcrypt = require("bcrypt");
 
 exports.getUser = async (filter) => {
   return await User.findOne(filter);
@@ -14,5 +15,11 @@ exports.getUsersApi = (filter) => {
 exports.Block_Unblock = async (_id) => {
   const user = await User.findById(_id);
   user.isLock = user.isLock ? "false" : "true";
+  return user.save();
+};
+
+exports.updatePassword = async (newProfile) => {
+  const user = await User.findById(newProfile._id);
+  user.password = await bcrypt.hash(newProfile.password, 10);
   return user.save();
 };

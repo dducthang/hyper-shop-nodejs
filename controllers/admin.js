@@ -1,6 +1,8 @@
 const AdminService = require("../models/services/adminService");
 const ProductService = require("../models/services/productService");
 const UserService = require("../models/services/userService");
+const bcrypt = require("bcrypt");
+
 exports.getAdmins = async (req, res, next) => {
   const admins = await AdminService.getAdmins();
   res.status(200).render("shop/adminList", {
@@ -47,6 +49,44 @@ exports.postProfile = async (req, res, next) => {
     await AdminService.updateProfile(newProfile);
     res.status(200).redirect("/admins/profile");
   }
+};
+
+exports.getUpdatePassword = async (req, res, next) => {
+  res.status(200).render("auth/updatePassword", {
+    categories: await ProductService.getCategoriesQuantity(),
+    brands: await ProductService.getBrands(),
+    profile: req.user,
+    user: true,
+    pageTitle: "Change password",
+  });
+};
+
+exports.postUpdatePassword = async (req, res, next) => {
+  const isMatch = await bcrypt.compare(
+    req.body.currentpassword,
+    req.user.password
+  );
+  if (isMatch) {
+    const user = {
+      password: req.body.password,
+      _id: req.user._id,
+    };
+    const remp = await UserService.updatePassword(user);
+    res.render("auth/updatePassword", {
+      success_msg: "Password changed",
+      categories: await ProductService.getCategoriesQuantity(),
+      brands: await ProductService.getBrands(),
+      user: req.user,
+      pageTitle: "Change password",
+    });
+  }
+  res.render("auth/updatePassword", {
+    errors: [{ msg: "Wrong current password" }],
+    categories: await ProductService.getCategoriesQuantity(),
+    brands: await ProductService.getBrands(),
+    user: req.user,
+    pageTitle: "Change password",
+  });
 };
 
 //
