@@ -7,6 +7,9 @@ exports.getUser = async (filter) => {
 exports.getUsers = (filter) => {
   return User.find(filter);
 };
+exports.getUsersApi = (filter) => {
+  return User.find(filter).select("email name _id isLock isAdmin");
+};
 
 exports.Block_Unblock = async (_id) => {
   const user = await User.findById(_id);
