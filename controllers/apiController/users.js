@@ -1,6 +1,6 @@
 const UserService = require("../../models/services/userService");
 exports.getUsersApi = async (req, res, next) => {
-  const ITEMS_PER_PAGE = 2;
+  const ITEMS_PER_PAGE = 10;
   let page = req.query.page;
   const isAdmin = req.query.isAdmin;
   let users = await UserService.getUsersApi({ isAdmin });
@@ -21,8 +21,7 @@ exports.getUsersApi = async (req, res, next) => {
 };
 
 exports.postActionUser = async (req, res, next) => {
-  console.log(req.body.userId);
-  console.log(await UserService.Block_Unblock(req.body.userId));
+  await UserService.Block_Unblock(req.body.userId);
   res.status(200).send({
     msg: "Action on account!",
   });

@@ -39,8 +39,11 @@
                 </div>
             </div>
             <div class="center" style="margin-top: 10px; margin-bottom: 0px">
-                <button class="btn btn-danger btn-sm" style="margin: 0 10px;"><i class="fas fa-times" style="margin-right: 5px;"></i>Block</button>
-                <button class="btn btn-primary btn-sm"style="margin: 0 10px;"><i class="far fa-circle" style="margin-right: 5px;"></i>Un Block</button>
+                <% if(!user.isLock){ %>
+                    <button id="<%= user._id %>" class="btn btn-danger btn-sm ActionOnUserBtn">Block</button>
+                <% }else{ %>
+                    <button id="<%= user._id %>" class="btn btn-success btn-sm ActionOnUserBtn">Unblock</button>
+                <% }%>
             </div>
         </div>
         <div class="center">
@@ -51,6 +54,7 @@
             </a>
         </div>
         <%- include('../includes/foot')%>
+        <script src="/ajax/user-ajax.js"></script>
 </body>
 
 </html>

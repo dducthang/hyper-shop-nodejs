@@ -36,9 +36,18 @@
             </div>
             
             </div>
+            <div class="center" style="margin-top: 10px; margin-bottom: 0px">
+                <% if(!user.isLock){ %>
+                    <button id="<%= user._id %>" class="btn btn-danger btn-sm ActionOnUserBtn">Block</button>
+                <% }else{ %>
+                    <button id="<%= user._id %>" class="btn btn-success btn-sm ActionOnUserBtn">Unblock</button>
+                <% }%>
+            </div>
         </div>
     </div>
     
     <%- include('../includes/foot')%>
+    <script src="/ajax/admin-ajax.js"></script>
+
 </body>
 </html>
