@@ -122,7 +122,7 @@ function reloadProduct(e) {
   const name = $("#search").val() !== "" ? $("#search").val() : null; //search by name
 
   e.preventDefault();
-  const url = "http://localhost:4000/api/products";
+  const url = "/api/products";
   let page = sessionStorage.getItem("page") || 1;
   if (page === "First") page = 1;
   if (page === "Last") page = sessionStorage.getItem("lastPage");

@@ -2,7 +2,7 @@ $(".pages").on("click", ".page-link", function () {
   const page = this.text;
   if (page === "...") return;
   $.ajax({
-    url: "http://localhost:4000/api/users",
+    url: "/api/users",
     type: "GET",
     data: {
       page,
@@ -78,7 +78,7 @@ function ActionOnUserHandler(e) {
   }
 
   $.ajax({
-    url: "http://localhost:4000/api/users",
+    url: "/api/users",
     type: "POST",
     data: {
       userId: $(this).attr("id"),
