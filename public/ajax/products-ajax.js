@@ -136,7 +136,7 @@ function reloadProduct(e) {
     productsPerPage,
     page,
     category: sessionStorage.getItem("category"),
-    brand,
+    brfand,
     color,
     sex,
     shoesHeight,
