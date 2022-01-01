@@ -16,6 +16,19 @@
   color: orange;
 }
 
+/* DROPDOWN MENU */
+.display-flex{
+  display: flex;
+}
+
+.card-item{
+  padding: 5px;
+}
+
+.hidden{
+  display: none;
+}
+
 /* ============================= SHOP ================================*/
 /* SEARCH BAR ======================== */
 .search-box {

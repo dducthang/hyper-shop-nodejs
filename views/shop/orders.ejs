@@ -1,0 +1,48 @@
+<%- include('../includes/head.ejs') %>
+<link href="/css/style.css" rel="stylesheet">
+<link href="/css/custom.css" rel="stylesheet">
+</head>
+<body>
+    <%- include('../includes/subHeader', {user})%>
+
+    <!-- CONTENT ================================ -->
+    <section class="item content container">
+		<div class="clearfix mb-20 card">
+			<div class="pull-left">
+				<h4 class="text-blue h4">Responsive table</h4>
+				<p>Responsive tables allow tables to be scrolled horizontally with ease. Make any table responsive across all viewports by wrapping a <code>.table  .table-responsive</code> Or, pick a maximum breakpoint with which to have a responsive table up to by using<code>.table-responsive{-sm|-md|-lg|-xl}</code>.</p>
+			</div>
+			<div class="col-md-6 col-sm-12 text-right">
+				<div class="dropdown">
+					<a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+						Filter reports
+					</a>
+					<div class="dropdown-menu dropdown-menu-right">
+						<a class="dropdown-item card-item" style="cursor: pointer;" id="filter-pending">Pending</a>
+						<a class="dropdown-item card-item" style="cursor: pointer;" id="filter-delivering">Delivering</a>
+						<a class="dropdown-item card-item" style="cursor: pointer;" id="filter-delivered">Delivered</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row justify-content-between">
+			<div class="col-md-12 card" id="pending-table">
+				<%- include('../includes/order/ordersTable', {orders: pendingOrders})%>
+			</div>
+			<div class="col-md-12 card hidden" id="delivering-table">
+				<%- include('../includes/order/ordersTable', {orders: deliveringOrders})%>
+			</div>
+			<div class="col-md-12 card hidden" id="delivered-table">
+				<%- include('../includes/order/ordersTable', {orders: deliveredOrders})%>
+			</div>
+		</div>
+	</div>
+	
+	</section>
+
+    <%- include('../includes/foot')%>
+    <script src="/ajax/user-ajax.js"></script>
+    <script src="/js/custom/toggle-orders-table.js"></script>
+    <script src="/ajax/change-order-status.js"></script>
+</body>
+</html>

@@ -1,14 +1,14 @@
-exports.getOrders = (req,res,next)=>{
-    res.status(200).render('shop/cart', {
-        pageTitle:'Cart',
-        bannerText:'Cart',
-        products:[
-            {
-                name: 'KD 14',
-                price: 110,
-                image: 'images/kd14.jpg',
-                quantity: 1
-            }
-        ],
+const OrderService = require('../Models/services/orderService');
+
+exports.getOrders = async (req,res,next)=>{
+    const pendingOrders = await OrderService.getPendingOrders();
+    const deliveringOrders = await OrderService.getDeliveringOrders();
+    const deliveredOrders = await OrderService.getDeliveredOrders();
+    res.status(200).render('shop/orders', {
+        user: req.user,
+        pageTitle: "Orders",
+        pendingOrders,
+        deliveringOrders,
+        deliveredOrders
     });
 }
