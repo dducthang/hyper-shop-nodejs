@@ -1,5 +1,5 @@
 exports.getIndex = (req, res, next)=>{
-    res.render('shop/index',{
+    res.status(200).render('shop/index',{
         pageTitle:'Hyper shop',
         products:[
             {
@@ -26,7 +26,8 @@ exports.getIndex = (req, res, next)=>{
                 price:120,
                 image:'images/zoom-freak-3.jpg'
             },
-        ]
+        ],
+        user:req.user
     });
 }
 

@@ -3,7 +3,7 @@
 <link href="/css/custom.css" rel="stylesheet">
 </head>
 <body>
-    <%- include('../includes/subHeader')%>
+    <%- include('../includes/subHeader', {user})%>
     <section class="item content">
         <div class="container toparea">
             <div class="underlined-title">
@@ -21,7 +21,7 @@
         </div>
     </section>
 
-    <form action="/admins/addadmin" method="post">
+    <form action="/admins/add" method="post">
     <div class="wrapper-profile bg-white mt-sm-5">
         
         <h4 class="pb-4 border-bottom">Account settings</h4>

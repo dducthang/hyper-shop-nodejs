@@ -3,7 +3,7 @@
 <link href="css/custom.css" rel="stylesheet">
 </head>
 <body>
-    <%- include('../includes/subHeader')%>
+    <%- include('../includes/subHeader', {user})%>
 
 	<section class="tag container">
 		<!-- SEARCH BAR ======================================== -->
@@ -44,14 +44,14 @@
 			<div class="col-md-3">
 				<%- include('../includes/sideBar/category')%>
 				
-				<%/*%>
+
 				<%- include('../includes/sideBar/brandFilterCard')%>
 				<%- include('../includes/sideBar/closureTypeFilterCard')%>
 				<%- include('../includes/sideBar/colorFilterCard')%>
 				<%- include('../includes/sideBar/genderFilterCard')%>
 				<%- include('../includes/sideBar/materialFilterCard')%>
 				<%- include('../includes/sideBar/shoesHeightFilterCard')%>
-				<%*/%>
+
 			</div>
 			<div class="col-md-9 ">
 				<div class="toparea">

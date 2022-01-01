@@ -120,12 +120,4 @@ function deleteProduct(productId){
   return Product.findByIdAndRemove(productId);
 }
 
-module.exports = {
-  countProducts,
-  getProducts,
-  getProduct,
-  getCategoriesQuantity,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-};
+module.exports = Product;

@@ -4,7 +4,7 @@
    </head>
 
    <body>
-      <%- include('../includes/subHeader')%>
+      <%- include('../includes/subHeader',{user})%>
       <div class="overlay">
          <div class="shop-name">
             <h1>HYPER SHOP</h1>
@@ -20,7 +20,9 @@
                   <!--     A welcome message or an explanation of the login form -->
                   <p>login here using your username and password</p>
                   <!--     Display error -->
-                  <% if(messages.error) {%> <% messages.error %> <% } %>
+                  <% if (messages.error) { %>
+                     <div class="alert alert-warning" role="alert"><%=messages.error%></div>
+                     <% } %>
                </header>
                <!--     End  header Content  -->
                <br>

@@ -1,12 +1,20 @@
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
 
-const adminController = require('../controllers/admin');
+const adminController = require("../controllers/admin");
 
-router.get('/', adminController.getAdmins);
-router.get('/profile', adminController.getProfile);
-router.get('/addadmin', adminController.getAddAdmin);
-router.post('/addadmin', adminController.addAdmin);
-router.get('/:id', adminController.getAdmin);
+router.get("/", adminController.getAdminList);
+
+// router.get("/", adminController.getAdmins);
+router.get("/profile", adminController.getProfile);
+router.post("/profile", adminController.postProfile);
+
+router.get("/updatepassword", adminController.getUpdatePassword);
+router.post("/updatepassword", adminController.postUpdatePassword);
+
+router.get("/add", adminController.getAddAdmin);
+router.post("/add", adminController.addAdmin);
+router.get("/:id([0-9a-fA-F]{24})", adminController.getAdmin);
+
 module.exports = router;

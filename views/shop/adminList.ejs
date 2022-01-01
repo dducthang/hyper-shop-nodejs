@@ -3,7 +3,7 @@
 <link href="css/custom.css" rel="stylesheet">
 </head>
 <body>
-    <%- include('../includes/subHeader')%>
+    <%- include('../includes/subHeader', {user})%>
 
     <!-- CONTENT ================================ -->
     <section class="item content container">
@@ -32,27 +32,77 @@
 						</div>
 					</div>
 					<div class="user-list">
-                        <%let i =1%>    
-                        <% for (admin of admins){%>
-                            <%admin.count=i%>
-                            <%i++%>
-                            <%- include('../includes/adminList/adminBox')%>
-                            <div class="divide"></div>
-                        <% } %>
+						<table class="table table-striped">
+							<thead>
+							  <tr>
+							    <th scope="col">#</th>
+							    <th scope="col">Name</th>
+							    <th scope="col">Email</th>
+							    <th scope="col">Action</th>
+							    <th scope="col">Detail</th>
+							  </tr>
+							</thead>
+							<tbody>
+							<%let count = 0%>
+							<% for(user of userList) { %>
+							  <tr>
+							    <th scope="row"><%=count+=1 %></th>
+							    <td><%= user.name %></td>
+							    <td><%= user.email %></td>
+							    <td>
+								<% if(!user.isLock){ %>
+									<button id="<%= user._id %>" class="btn btn-danger btn-sm ActionOnUserBtn">Block</button>
+								<% }else{ %>
+									<button id="<%= user._id %>" class="btn btn-success btn-sm ActionOnUserBtn">Unblock</button>
+								<% }%>
+							      </td>      
+							    <td>
+								<a class="btn btn-primary" href="/users/<%=user._id %>">
+								    Details
+								</a>
+							      </td>
+							  </tr>
+							  <% } %>
+							</tbody>
+						        </table>
                     </div>
 				</div>
 				<div class="pages">
 					<p class="loadMore"><a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a></p>
 					<nav aria-label="Page navigation example" class="d-flex justify-content-center">
-					  <ul class="pagination">
-						<li class="page-item"><a href="#" aria-label="Previous" class="page-link"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
-						<li class="page-item active"><a href="#" class="page-link">1</a></li>
-						<li class="page-item"><a href="#" class="page-link">2</a></li>
-						<li class="page-item"><a href="#" class="page-link">3</a></li>
-						<li class="page-item"><a href="#" class="page-link">4</a></li>
-						<li class="page-item"><a href="#" class="page-link">5</a></li>
-						<li class="page-item"><a href="#" aria-label="Next" class="page-link"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
-					  </ul>
+						<div class="pages">
+					
+							<nav
+							aria-label="Page navigation example"
+							class="d-flex justify-content-center"
+						  >
+							<% if (lastPage > 0) { %>
+							<ul class="pagination custom-hover">
+							  <li class="page-item custom-hover "><a class="page-link">First</a></li>
+
+							  <% let i = (Number(currentPage) > 5 ? Number(currentPage) - 4 : 1) %> <%
+							  if (i !== 1) { %>
+							  <li class="page-item custom-hover"><a class="page-link">...</a></li>
+							  <% } %> <% for (; i <= (Number(currentPage) + 4) && i <= lastPage; i++)
+							  { %> <% if (i == currentPage) { %>
+							  <li class="page-item custom-hover active"><a class="page-link"><%= i %></a></li>
+							  <% } else { %>
+							  <li class="page-item custom-hover">
+								<a class="page-link"><%= i %></a>
+							  </li>
+							  <% } %> <% if (i == Number(currentPage) + 4 && i < lastPage) { %>
+							  <li class="page-item custom-hover"><a class="page-link">...</a></li>
+							  <% } %> <% } %> <% if (currentPage == lastPage) { %>
+							  <li class="page-item custom-hover"><a class="page-link">Last</a></li>
+							  <% } else { %>
+							  <li>
+								<a class="page-link">Last</a>
+							  </li>
+							  <% } %>
+							</ul>
+							<% } %>
+						  </nav>
+						</div>
 					</nav>
 				</div>
 			</div>
@@ -62,5 +112,7 @@
 	</section>
 
     <%- include('../includes/foot')%>
+    <script src="/ajax/admin-ajax.js"></script>
+
 </body>
 </html>

@@ -3,7 +3,7 @@
 <link href="/css/custom.css" rel="stylesheet">
 </head>
 <body>
-    <%- include('../includes/subHeader')%>
+    <%- include('../includes/subHeader', {user})%>
     <!-- CONTENT =============================-->
     <section class="item content">
         <div class="container toparea">
@@ -118,7 +118,7 @@
         <% if (comments.length> 0) { %>
             <% for (comment of comments){ %>
                 <!-- <span></span> -->
-                <%- include('../includes/comment', {comment:comment}) %> 
+                <%- include('../includes/comment', {comment}) %> 
                
             <% } %>
         <% } %>
@@ -126,7 +126,7 @@
 
 
     <%- include('../includes/foot')%>
-
+    <script src="/ajax/response-ajax.js"></script>
     
 </body>
 </html>

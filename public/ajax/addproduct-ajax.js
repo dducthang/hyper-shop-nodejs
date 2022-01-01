@@ -10,7 +10,7 @@ const category = document.getElementById("category");
 const image = document.getElementById("image");
 const addProductForm = document.getElementById('addProductForm');
 
-const url = 'http://localhost:4000/api/products';
+const url = '/api/products';
 
 const product = {
     productName :productName.value,
