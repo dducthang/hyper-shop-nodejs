@@ -1,5 +1,7 @@
 $(".pages").on("click", ".page-link", function () {
   const page = this.text;
+  const isLock = $("input[name='options']:checked").attr("id");
+
   if (page === "...") return;
   $.ajax({
     url: "/api/users",
@@ -7,7 +9,7 @@ $(".pages").on("click", ".page-link", function () {
     data: {
       page,
       isAdmin: 1,
-      // pagelimit: 2,
+      isLock,
     },
     dataType: "json",
     success: function (data) {
@@ -123,3 +125,38 @@ function getPagesNumber(lastPage, page) {
   res += `</nav>`;
   return res;
 }
+
+$("div[name='StateButton']").on("click", ".btn", function () {
+  const page = 1;
+
+  const isLock = $(this).children("input").attr("id");
+  if (page === "...") return;
+  $.ajax({
+    url: "/api/users",
+    type: "GET",
+    data: {
+      page,
+      isAdmin: 1,
+      isLock,
+    },
+    dataType: "json",
+    success: function (data) {
+      const { users, page, lastPage } = data;
+      //xử lí data gửi về
+      let userList = "";
+      let userBox;
+      let i = 1;
+      users.forEach((user) => {
+        userBox = getUserBox(user, i++);
+        userList += userBox;
+      });
+      const pagesNumber = getPagesNumber(lastPage, page); //paging number ở dưới
+      //xử lí data gửi về
+      $("table tbody").html(userList);
+      $(".pages").html(pagesNumber);
+    },
+    error: function (error) {
+      console.log(error);
+    },
+  });
+});
