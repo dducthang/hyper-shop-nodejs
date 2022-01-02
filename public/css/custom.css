@@ -29,6 +29,15 @@
   display: none;
 }
 
+.data-status{
+  cursor:pointer;
+}
+
+/* ============================= ORDER DETAIL ======================= */
+.small-image{
+  width: 50px;
+}
+
 /* ============================= SHOP ================================*/
 /* SEARCH BAR ======================== */
 .search-box {

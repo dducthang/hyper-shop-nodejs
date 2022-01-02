@@ -1,4 +1,3 @@
-const orderStatus = document.querySelectorAll('.data-status');
 const url = "http://localhost:4000/api/order/change-status"
 
 
@@ -34,44 +33,56 @@ const changeStatusHandler=async(e)=>{
         }).then(response=>{
             if (response.status>= 200 && response.status<300){
                 return response.json().then(order=>{
-                        const oldRow = document.getElementById(id);
-                        oldRow.remove();
-                        let table;
-                        if(order.status=="Delivering"){
-                            table = document.getElementById('delivering-table');
-                        }
-                        if(order.status=="Delivered"){
-                            table = document.getElementById('delivered-table');
-                        }
-                        if(order.status=="Pending"){
-                            table = document.getElementById('pending-table');
-                        }
-                        table.querySelector('');
-                        const row = document.createElement('tr');
-                        row.setAttribute('id',order._id);
-                        row.innerHTML=`
-                            <th scope="row">00</th>
-                            <td>${order.name}</td>
-                            <td>${order.phone}</td>
-                            <td>${order.address}</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                        ${order.status}
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <div class="order-status">
-                                            <div class="dropdown-item card-item" id="Pending-${order._id}>Pending</div>
-                                            <div class="dropdown-item card-item" id="Delivering-${order._id}">Delivering</div>
-                                            <div class="dropdown-item card-item" id="Delivered-${order._id}">Delivered</div>
-                                        </div>
+                    const oldRow = document.getElementById(id);
+                    oldRow.remove();
+                    let table;
+                    if(order.status=="Delivering"){
+                        table = document.getElementById('delivering-table');
+                    }
+                    if(order.status=="Delivered"){
+                        table = document.getElementById('delivered-table');
+                    }
+                    if(order.status=="Pending"){
+                        table = document.getElementById('pending-table');
+                    }
+                    const tableBody = table.querySelector('tbody');
+                    const row = document.createElement('tr');
+                    row.setAttribute('id',order._id);
+                    row.innerHTML=`
+                        <th scope="row">${order._id}</th>
+                        <td>${order.name}</td>
+                        <td>${order.phone}</td>
+                        <td>${order.address}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                    ${order.status}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <div class="order-status">
+                                        <div class="dropdown-item data-status" id="Pending-${order._id}">Pending</div>
+                                        <div class="dropdown-item data-status" id="Delivering-${order._id}">Delivering</div>
+                                        <div class="dropdown-item data-status" id="Delivered-${order._id}">Delivered</div>
                                     </div>
                                 </div>
-                            </td>
-                        `
-                        table.appendChild(row);
-                    } 
-                );
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">Details</button>
+                        </td>
+                    `
+                    tableBody.appendChild(row);
+
+                    const oldScript = document.getElementById('rerun-script');
+                    const newScript = document.createElement('script');
+                    newScript.setAttribute('src', '/js/custom/rerun-change-orderstatus.js');
+                    newScript.setAttribute('id', 'rerun-script');
+
+                    oldScript.parentNode.insertBefore(newScript, oldScript);
+                    oldScript.parentElement.removeChild(oldScript);
+                } 
+                
+            );
             }else{
                 response.json().then(error=>{
                     console.log('ERROR: '+error);
@@ -83,6 +94,3 @@ const changeStatusHandler=async(e)=>{
     }
 }
 
-for(let status of orderStatus){
-    status.addEventListener('click', changeStatusHandler);
-}

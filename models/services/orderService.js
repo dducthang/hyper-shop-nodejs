@@ -49,3 +49,16 @@ exports.updateStatusOrder = async (orderStatus)=>{
   order.save();
   return order;
 }
+
+exports.getOrderById = async (orderId)=>{
+  const order = await Order.findOne({_id:orderId}).populate('user')
+  .populate({
+      path: "orderItems",
+      model: "OrderItem",
+      populate: {
+        path: "product",
+        model: "Product",
+      },
+    });
+  return order;
+}
