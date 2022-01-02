@@ -12,3 +12,13 @@ exports.getOrders = async (req,res,next)=>{
         deliveredOrders
     });
 }
+
+exports.getOrder = async (req,res,next)=>{
+    const orderId = req.params.orderId;
+    const order = await OrderService.getOrderById(orderId);
+    res.status(200).render('shop/orderDetail',{
+        user: req.user,
+        pageTitle: "Order Detail",
+        order
+    })
+}

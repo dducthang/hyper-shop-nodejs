@@ -10,17 +10,16 @@
 		<div class="clearfix mb-20 card">
 			<div class="pull-left">
 				<h4 class="text-blue h4">Responsive table</h4>
-				<p>Responsive tables allow tables to be scrolled horizontally with ease. Make any table responsive across all viewports by wrapping a <code>.table  .table-responsive</code> Or, pick a maximum breakpoint with which to have a responsive table up to by using<code>.table-responsive{-sm|-md|-lg|-xl}</code>.</p>
 			</div>
-			<div class="col-md-6 col-sm-12 text-right">
-				<div class="dropdown">
-					<a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+			<div class="col-md-6 col-sm-12 pull-right ">
+				<div class="dropdown row justify-content-end">
+					<div class="btn btn-primary dropdown-toggle col-lg-3 offset-4" role="button" data-toggle="dropdown">
 						Filter reports
-					</a>
+					</div>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a class="dropdown-item card-item" style="cursor: pointer;" id="filter-pending">Pending</a>
-						<a class="dropdown-item card-item" style="cursor: pointer;" id="filter-delivering">Delivering</a>
-						<a class="dropdown-item card-item" style="cursor: pointer;" id="filter-delivered">Delivered</a>
+						<div class="dropdown-item card-item" style="cursor: pointer;" id="filter-pending">Pending</div>
+						<div class="dropdown-item card-item" style="cursor: pointer;" id="filter-delivering">Delivering</div>
+						<div class="dropdown-item card-item" style="cursor: pointer;" id="filter-delivered">Delivered</div>
 					</div>
 				</div>
 			</div>
@@ -44,5 +43,6 @@
     <script src="/ajax/user-ajax.js"></script>
     <script src="/js/custom/toggle-orders-table.js"></script>
     <script src="/ajax/change-order-status.js"></script>
+    <script src="/js/custom/rerun-change-orderstatus.js" id="rerun-script"></script>
 </body>
 </html>

@@ -3,19 +3,19 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Order ID</th>
                     <th scope="col">User</th>
                     <th scope="col">Phone</th>
                     <th scope="col">Address</th>
                     <th scope="col">Status</th>
-                    <!-- <th scope="col">Actions</th> -->
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <%let count = 0%>
                 <% for(order of orders) { %>
                 <tr id="<%=order._id%>">
-                    <th scope="row"><%=count+=1%></th>
+                    <th scope="row"><%=order._id%></th>
                     <td><%=order.user.email%></td>
                     <td>09987765563</td>
                     <td><%=order.address%></td>
@@ -32,6 +32,9 @@
                                 </div>
                             </div>
                           </div>
+                    </td>
+                    <td>
+                        <a href="/orders/<%=order._id%>" class="btn btn-primary">Details</a>
                     </td>
                 </tr>
                 <% } %>
