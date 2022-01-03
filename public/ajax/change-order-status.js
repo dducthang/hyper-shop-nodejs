@@ -68,7 +68,7 @@ const changeStatusHandler=async(e)=>{
                             </div>
                         </td>
                         <td>
-                            <button class="btn btn-primary">Details</button>
+                            <a href="/orders/${order._id}" class="btn btn-primary">Details</a>
                         </td>
                     `
                     tableBody.appendChild(row);
