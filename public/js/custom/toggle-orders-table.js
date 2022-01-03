@@ -14,6 +14,7 @@ const togglePendingTable = ()=>{
     deliveredTable.classList.add('hidden');
 
     tableName.innerText = "Pending Order List";
+
 }
 const toggleDeliveringTable = ()=>{
     pendingTable.classList.add('hidden');
@@ -21,6 +22,7 @@ const toggleDeliveringTable = ()=>{
     deliveredTable.classList.add('hidden');
 
     tableName.innerText = "Delivering Order List";
+
 }
 const toggleDeliveredTable = ()=>{
     pendingTable.classList.add('hidden');
