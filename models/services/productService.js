@@ -1,4 +1,5 @@
 const Product = require('../product');
+const OrderItem = require('../orderItem');
 
 exports.countProducts = filters => {
   return Product.find(filters).countDocuments();
@@ -41,6 +42,26 @@ exports.updateProduct = newProduct => {
     return product.save();
   });
 };
+exports.getTopProducts = () => {
+  return OrderItem.aggregate([
+    {
+      $group: {
+        _id: '$product',
+        count: { $sum: 1 },
+      },
+    },
+    { $sort: { count: -1 } },
+    { $limit: 10 },
+    {
+      $lookup: {
+        from: 'products',
+        localField: '_id',
+        foreignField: '_id',
+        as: 'product',
+      },
+    },
+  ]);
+};
 
 exports.getCategoriesQuantity = async () => {
   const catsQty = await Product.aggregate([
@@ -50,6 +71,7 @@ exports.getCategoriesQuantity = async () => {
         count: { $sum: 1 },
       },
     },
+    { $sort: { count: -1 } },
     { $limit: 5 },
   ]);
   const sum = await Product.countDocuments();
@@ -64,6 +86,7 @@ exports.getBrands = async () => {
         _id: '$brand',
       },
     },
+    { $sort: { count: -1 } },
     { $limit: 5 },
   ]);
 };
@@ -76,6 +99,7 @@ exports.getClosureTypes = async () => {
         count: { $sum: 1 },
       },
     },
+    { $sort: { count: -1 } },
     { $limit: 5 },
   ]);
 };
@@ -87,6 +111,7 @@ exports.getShoesHeights = async () => {
         count: { $sum: 1 },
       },
     },
+    { $sort: { count: -1 } },
     { $limit: 5 },
   ]);
 };
@@ -98,6 +123,7 @@ exports.getMaterials = async () => {
         count: { $sum: 1 },
       },
     },
+    { $sort: { count: -1 } },
     { $limit: 5 },
   ]);
 };
