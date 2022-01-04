@@ -84,6 +84,7 @@ exports.getBrands = async () => {
     {
       $group: {
         _id: '$brand',
+        count: { $sum: 1 },
       },
     },
     { $sort: { count: -1 } },
