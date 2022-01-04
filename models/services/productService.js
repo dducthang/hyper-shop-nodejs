@@ -44,6 +44,7 @@ exports.updateProduct = newProduct => {
 };
 exports.getTopProducts = () => {
   return OrderItem.aggregate([
+    { $match: { isOrdered: true } },
     {
       $group: {
         _id: '$product',
