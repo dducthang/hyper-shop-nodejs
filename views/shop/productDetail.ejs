@@ -39,35 +39,34 @@
                     </div>
                     <div class="properties-box">
                         <ul class="unstyle">
-                            <li><b class="propertyname">Brand:</b><%=product.brand%></li>
-                            <li><b class="propertyname">Color:</b><%=product.color%></li>
-                            <li><b class="propertyname">Files Included:</b> mp3, audio, jpeg, png</li>
-                            <li><b class="propertyname">Documentation:</b> Well Documented</li>
-                            <li><b class="propertyname">License:</b> GNU</li>
-                            <li><b class="propertyname">Requires:</b> Easy Digital Downloads</li>
-                            <li><b class="propertyname">Any Field Etc:</b> Any Detail</li>
+                            <li><b class="propertyname">Brand: </b><%=product.brand%></li>
+                            <li><b class="propertyname">Color: </b><%=product.color%></li>
+                            <li><b class="propertyname">Price: </b><%=product.price%> $</li>
+                            <li><b class="propertyname">Brand: </b><%=product.brand%></li>
+                            <li><b class="propertyname">Material: </b><%=product.material%></li>
+
                         </ul>
                     </div>
                     <form class="product-size">
                         <div class="medium-text">
-                            <span>Select size</span>
+                            <span>Available size</span>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    <!-- <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked> -->
                                     <label class="form-check-label" for="exampleRadios1">
                                         7
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                    <!-- <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"> -->
                                     <label class="form-check-label" for="exampleRadios2">
                                         7.5
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
+                                    <!-- <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" > -->
                                     <label class="form-check-label" for="exampleRadios3">
                                         8
                                     </label>
@@ -75,19 +74,19 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    <!-- <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked> -->
                                     <label class="form-check-label" for="exampleRadios1">
                                     8.5
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                    <!-- <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"> -->
                                     <label class="form-check-label" for="exampleRadios2">
                                         9
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" >
+                                    <!-- <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" > -->
                                     <label class="form-check-label" for="exampleRadios3">
                                         9.5
                                     </label>
@@ -97,12 +96,12 @@
                     </form>
                     <div style="margin-top: 20px;">
                         <div class="col-md-6">
-                            <a href="/products/editProduct/<%=product._id%>" class="btn btn-buynow">Edit</a>
+                            <a href="/products/editProduct/<%=product._id%>" class="btn btn-buynow" style="border-radius: 10px;">Edit</a>
                         </div>
                         <div class="col-md-6">
                             <form action="/products/deleteProduct" method="post">
                                 <input type="hidden" name="productId" value="<%=product._id%>">
-                                <button class="btn btn-buynow" style="background-color: rgb(194, 53, 53);">Delete</button>
+                                <button class="btn btn-buynow" style="background-color: rgb(194, 53, 53); border-radius: 10px;">Delete</button>
                             </form>
                         </div>
                     </div>
