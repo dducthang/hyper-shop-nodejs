@@ -136,7 +136,7 @@ exports.getAdminList = async (req, res, next) => {
     .skip((page - 1) * ITEMS_PER_PAGE)
     .limit(ITEMS_PER_PAGE);
   res.status(200).render("shop/adminList", {
-    pageTitle: "User list",
+    pageTitle: "Admin list",
     user: req.user,
     userList,
     totalUsers,

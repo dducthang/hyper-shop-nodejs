@@ -71,6 +71,7 @@ const changeStatusHandler=async(e)=>{
                             <a href="/orders/${order._id}" class="btn btn-primary">Details</a>
                         </td>
                     `
+                    alert("Change order status successfully.");
                     tableBody.appendChild(row);
 
                     const oldScript = document.getElementById('rerun-script');
