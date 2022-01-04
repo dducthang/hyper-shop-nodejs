@@ -1,4 +1,4 @@
-const OrderService = require('../Models/services/orderService');
+const OrderService = require('../models/services/orderService');
 
 exports.getOrders = async (req,res,next)=>{
     const pendingOrders = await OrderService.getPendingOrders();
