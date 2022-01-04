@@ -1,4 +1,4 @@
-const OrderService = require("../../Models/services/orderService");
+const OrderService = require("../../models/services/orderService");
 
 exports.postOrderStatus = async (req, res, next)=>{
     const orderStatus = req.body;
