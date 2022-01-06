@@ -148,3 +148,10 @@ exports.getAdminList = async (req, res, next) => {
     lastPage: Math.ceil(totalUsers / ITEMS_PER_PAGE),
   });
 };
+
+exports.getRevenue = (req, res, next)=>{
+  res.render('statistics/revenue',{
+    pageTitle:"Revenue",
+    user: req.user
+  });
+}

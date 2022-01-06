@@ -17,4 +17,6 @@ router.get("/add", adminController.getAddAdmin);
 router.post("/add", adminController.addAdmin);
 router.get("/:id([0-9a-fA-F]{24})", adminController.getAdmin);
 
+router.get("/revenue", adminController.getRevenue);
+
 module.exports = router;
