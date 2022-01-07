@@ -18,5 +18,8 @@ router.post("/add", adminController.addAdmin);
 router.get("/:id([0-9a-fA-F]{24})", adminController.getAdmin);
 
 router.get("/revenue", adminController.getRevenue);
+router.post("/get-revenue-dates", adminController.getRevenueDates);
+router.post("/get-revenue-month", adminController.getRevenueDates);
+router.post("/get-revenue-year", adminController.getRevenueMonth);
 
 module.exports = router;
