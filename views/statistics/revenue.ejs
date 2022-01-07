@@ -1,6 +1,9 @@
 <%- include('../includes/head.ejs') %>
 <link href="/css/style.css" rel="stylesheet">
 <link href="/css/custom.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js" 
+		integrity="sha512-uLlukEfSLB7gWRBvzpDnLGvzNUluF19IDEdUoyGAtaO0MVSBsQ+g3qhLRL3GTVoEzKpc24rVT6X1Pr5fmsShBg==" 
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <%- include('../includes/subHeader', {user})%>
@@ -25,24 +28,24 @@
 					<div class="card-body">
 					  <ul class="nav nav-pills flex-column category-menu">
 						<li>
-							<a href="/products" class="nav-link category-filter text-uppercase">
+							<a id="revenueByDates" class="nav-link text-uppercase" style="cursor: pointer;">
 								DAYS
 							</a>
-							<a href="/products" class="nav-link category-filter text-uppercase">
+							<a id="revenueByMonth" class="nav-link text-uppercase" style="cursor: pointer;">
 								MONTHS
 							</a>
-							<a href="/products" class="nav-link category-filter text-uppercase">
+							<a id="revenueByYear" class="nav-link text-uppercase" style="cursor: pointer;">
 								YEARS
 							</a>
 						</li>
 						<li>
-						  	<a href="#" class="nav-link category-filter text-uppercase">
+						  	<a class="nav-link text-uppercase">
 							  <span class="badge badge-secondary">Days</span>
 							</a>
-						  	<a href="#" class="nav-link category-filter text-uppercase">
+						  	<a class="nav-link text-uppercase">
 							  <span class="badge badge-secondary">Months</span>
 							</a>
-						  	<a href="#" class="nav-link category-filter text-uppercase">
+						  	<a class="nav-link text-uppercase">
 							  <span class="badge badge-secondary">Years</span>
 							</a>
 						</li>
@@ -52,7 +55,7 @@
 
 			</div>
 			<div class="col-md-9 ">
-				<div class="toparea">
+				<div class="toparea" id="date-revenue">
 					<div class="underlined-title">
 						<div class="editContent">
 							<h1 class="text-center latestitems">REVENUE BY DAYS</h1>
@@ -66,27 +69,52 @@
 						</div>
 					</div>
 					<div class="card-box mb-30">
-						<table class="data-table table nowrap">
-							<thead>
-								<tr>
-									<th class="table-plus datatable-nosort">Product</th>
-									<th>Name</th>
-									<th>Color</th>
-									<th>Size</th>
-									<th>Price</th>
-									<th>Oty</th>
-									<th class="datatable-nosort">Action</th>
-								</tr>
-							</thead>
-							<tbody>
-								
-							</tbody>
-						</table>
+						<canvas id="dateChart"></canvas>
+						<input type="hidden" id="monday" value/>
+						<input type="hidden" id="tuesday" value/>
+						<input type="hidden" id="wednesday" value/>
+						<input type="hidden" id="thurseday" value/>
+						<input type="hidden" id="friday" value/>
+						<input type="hidden" id="saturday" value/>
+						<input type="hidden" id="sunday" value/>
 					</div>
 				</div>
-			</div>
-
-			<div class="col-md-9 ">
+				<div class="toparea hidden" id="month-revenue">
+					<div class="underlined-title">
+						<div class="editContent">
+							<h1 class="text-center latestitems">REVENUE BY MONTHS</h1>
+						</div>
+						<div class="wow-hr type_short">
+							<span class="wow-hr-h">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							</span>
+						</div>
+					</div>
+					<div class="card-box mb-30" style="display: flex; align-items: center; flex-direction: column;">
+						<div class="loader" id='loader-month'></div>
+						<canvas id="lineChart"></canvas>
+					</div>
+				</div>
+				<div class="toparea hidden" id="year-revenue">
+					<div class="underlined-title">
+						<div class="editContent">
+							<h1 class="text-center latestitems">REVENUE BY YEAR</h1>
+						</div>
+						<div class="wow-hr type_short">
+							<span class="wow-hr-h">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							</span>
+						</div>
+					</div>
+					<div class="card-box mb-30" style="display: flex; align-items: center; flex-direction: column;">
+						<div class="loader" id='loader-year'></div>
+						<canvas id="yearChart"></canvas>
+					</div>
+				</div>
 				<div class="toparea">
 					<div class="underlined-title">
 						<div class="editContent">
@@ -123,6 +151,7 @@
 				</div>
 			</div>
 
+
 		</div>
 	</div>
 	
@@ -133,6 +162,9 @@
 	<script src="/js/productFilter.js"></script>
     <script src="/ajax/products-ajax.js"></script>
     <script src="/js/jquery-util.js"></script>
-	
+	<script src="/js/custom/orders-by-dates.js"></script>
+	<script src="/js/custom/orders-by-month.js"></script>
+	<script src="/js/custom/orders-by-year.js"></script>
+	<script src="/js/custom/toggle-order-statistics.js"></script>
 </body>
 </html>

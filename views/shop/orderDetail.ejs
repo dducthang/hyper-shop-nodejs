@@ -21,6 +21,7 @@
                             <th scope="col">User</th>
                             <th scope="col">Phone</th>
                             <th scope="col">Address</th>
+                            <th scope="col">Ordered Date</th>
                             <th scope="col">Status</th>
                         </tr>
                     </thead>
@@ -30,6 +31,7 @@
                             <td><%=order.user.email%></td>
                             <td>09987765563</td>
                             <td><%=order.address%></td>
+                            <td><%=order.orderedDate.toDateString()%></td>
                             <td>
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">

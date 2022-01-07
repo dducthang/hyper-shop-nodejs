@@ -62,3 +62,25 @@ exports.getOrderById = async (orderId)=>{
     });
   return order;
 }
+
+exports.getOrderByOrderedDate = async (date)=>{
+  const orders = await Order.find({});
+  let count =0;
+  for(let order of orders){
+    if(order.orderedDate.toDateString()==date){
+      count +=1;
+    }
+  }
+  return count;
+}
+
+exports.getOrderByOrderedMonth = async (month, year)=>{
+  const orders = await Order.find({});
+  let count =0;
+  for(let order of orders){
+    if(order.orderedDate.toDateString().substring(4,7)==month&&order.orderedDate.toDateString().substring(11,15)==year){
+      count +=1;
+    }
+  }
+  return count;
+}

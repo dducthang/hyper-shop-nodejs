@@ -1,6 +1,7 @@
 const AdminService = require("../models/services/adminService");
 const ProductService = require("../models/services/productService");
 const UserService = require("../models/services/userService");
+const OrderService = require("../models/services/orderService");
 const bcrypt = require("bcrypt");
 
 exports.getAdmins = async (req, res, next) => {
@@ -155,3 +156,25 @@ exports.getRevenue = (req, res, next)=>{
     user: req.user
   });
 }
+
+exports.getRevenueDates = async (req, res, next)=>{
+  const weeks = req.body;
+  revenueDates = [];
+  for(date of weeks){
+    const count = await OrderService.getOrderByOrderedDate(date)
+    revenueDates.push(count);
+  }
+  res.status(200).send(revenueDates);
+}
+
+exports.getRevenueMonth = async (req, res, next)=>{
+  const data = req.body;
+  revenueMonths = [];
+  for(month of data.months){
+    const count = await OrderService.getOrderByOrderedMonth(month, data.year)
+    revenueMonths.push(count);
+  }
+  res.status(200).send(revenueMonths);
+}
+
+
