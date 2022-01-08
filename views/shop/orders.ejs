@@ -17,6 +17,7 @@
 						Filter reports
 					</div>
 					<div class="dropdown-menu dropdown-menu-right">
+						<div class="dropdown-item card-item" style="cursor: pointer;" id="filter-all">All</div>
 						<div class="dropdown-item card-item" style="cursor: pointer;" id="filter-pending">Pending</div>
 						<div class="dropdown-item card-item" style="cursor: pointer;" id="filter-delivering">Delivering</div>
 						<div class="dropdown-item card-item" style="cursor: pointer;" id="filter-delivered">Delivered</div>
@@ -25,7 +26,10 @@
 			</div>
 		</div>
 		<div class="row justify-content-between">
-			<div style="margin-bottom: 200px;"class="col-md-12 card" id="pending-table">
+			<div style="margin-bottom: 200px;"class="col-md-12 card" id="all-table">
+				<%- include('../includes/order/ordersTable', {orders: allOrders})%>
+			</div>
+			<div style="margin-bottom: 200px;"class="col-md-12 card hidden" id="pending-table">
 				<%- include('../includes/order/ordersTable', {orders: pendingOrders})%>
 			</div>
 			<div style="margin-bottom: 200px;"class="col-md-12 card hidden" id="delivering-table">
