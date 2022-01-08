@@ -80,8 +80,8 @@ exports.getCategoriesQuantity = async () => {
   //output [{name,quantity}],sum
   return { catsQty, sum };
 };
-exports.getBrands = async () => {
-  return await Product.aggregate([
+exports.getBrands = () => {
+  return Product.aggregate([
     {
       $group: {
         _id: '$brand',
@@ -93,8 +93,8 @@ exports.getBrands = async () => {
   ]);
 };
 
-exports.getClosureTypes = async () => {
-  return await Product.aggregate([
+exports.getClosureTypes = () => {
+  return Product.aggregate([
     {
       $group: {
         _id: '$closureType',
@@ -105,8 +105,8 @@ exports.getClosureTypes = async () => {
     { $limit: 5 },
   ]);
 };
-exports.getShoesHeights = async () => {
-  return await Product.aggregate([
+exports.getShoesHeights = () => {
+  return Product.aggregate([
     {
       $group: {
         _id: '$shoesHeight',
@@ -117,8 +117,8 @@ exports.getShoesHeights = async () => {
     { $limit: 5 },
   ]);
 };
-exports.getMaterials = async () => {
-  return await Product.aggregate([
+exports.getMaterials = () => {
+  return Product.aggregate([
     {
       $group: {
         _id: '$material',
