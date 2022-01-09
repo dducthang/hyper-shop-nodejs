@@ -70,13 +70,6 @@
 					</div>
 					<div class="card-box mb-30">
 						<canvas id="dateChart"></canvas>
-						<input type="hidden" id="monday" value/>
-						<input type="hidden" id="tuesday" value/>
-						<input type="hidden" id="wednesday" value/>
-						<input type="hidden" id="thurseday" value/>
-						<input type="hidden" id="friday" value/>
-						<input type="hidden" id="saturday" value/>
-						<input type="hidden" id="sunday" value/>
 					</div>
 				</div>
 				<div class="toparea hidden" id="month-revenue">
@@ -142,7 +135,7 @@
 							</thead>
 							<tbody>
 								<% for(tp of topProducts){ %>
-									<%- include('./statisticalRow', product)%>
+									<%- include('./statisticalRow', tp)%>
 								<% } %>
 							</tbody>
 						</table>

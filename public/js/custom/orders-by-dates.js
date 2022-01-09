@@ -5,6 +5,9 @@ const url = "http://localhost:4000/admins/get-revenue-dates";
 const getDaysInWeek = (current) =>{
     var week= []; 
     // Starting Monday not Sunday
+    if(current.getDay()==0){
+        current.setDate((current.getDate()-1));
+    }
     current.setDate((current.getDate() - current.getDay() +1));
     for (var i = 0; i < 7; i++) {
         week.push(
