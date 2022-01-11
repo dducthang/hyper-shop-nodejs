@@ -11,7 +11,7 @@
          </div>
 
          <!-- LOGN IN FORM by Omar Dsoky -->
-         <form method="POST" action="/auth/login">
+         <form method="POST">
             <!--   con = Container  for items in the form-->
             <div class="con">
                <!--     Start  header Content  -->
@@ -20,9 +20,7 @@
                   <!--     A welcome message or an explanation of the login form -->
                   <p>login here using your username and password</p>
                   <!--     Display error -->
-                  <% if (messages.error) { %>
-                     <div class="alert alert-warning" role="alert"><%=messages.error%></div>
-                     <% } %>
+                  <div hidden id="displayError" class="alert alert-warning" role="alert"></div>
                </header>
                <!--     End  header Content  -->
                <br>
@@ -79,5 +77,6 @@
       </div>
       <%- include('../includes/foot')%>
    </body>
+   <script src="/ajax/auth-ajax.js"></script>
 
    </html>
