@@ -4,11 +4,9 @@ const url = "http://localhost:4000/api/order/change-status"
 const xchangeStatusHandler = (e)=>{
     let statusStr = e.currentTarget.id;
     let parent = e.currentTarget.closest('.dropdown-menu');
-    console.log(parent.getAttribute("data-status"))
     const index = statusStr.indexOf('-');
     const id = statusStr.substring(index+1);
     const status = statusStr.substring(0,index);
-    console.log(status);
 }
 
 

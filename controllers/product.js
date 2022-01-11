@@ -150,7 +150,6 @@ exports.postAddProduct = (req, res, next) => {
             .toFile('./public/img/' + req.file.originalname);
 
         ProductService.createProduct(product).then(result => {
-          console.log('Created product');
           res.status(200).render('shop/addProduct', {
             pageTitle: 'Add product',
             error: null,
@@ -179,7 +178,6 @@ exports.postEditProduct = (req, res, next) => {
     req,
     res,
     (err = async () => {
-      console.log();
       const product = {
         id: req.body.productId,
         name: req.body.productName,
@@ -216,7 +214,6 @@ exports.postEditProduct = (req, res, next) => {
       }
       ProductService.updateProduct(product)
         .then(result => {
-          console.log('UPDATED PRODUCT');
           res.status(201).redirect('/products');
         })
         .catch(error => console.log(error));
@@ -228,7 +225,6 @@ exports.postDeleteProduct = (req, res, next) => {
   const productId = req.body.productId;
   ProductService.deleteProduct(productId)
     .then(() => {
-      console.log('DELETED PRODUCT');
       res.status(200).redirect('/products');
     })
     .catch(err => console.log(err));

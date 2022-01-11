@@ -151,7 +151,6 @@ exports.getAdminList = async (req, res, next) => {
 };
 
 exports.getRevenue = async (req, res, next) => {
-  console.log(await ProductService.getTopProducts());
   res.render('statistics/revenue', {
     pageTitle: 'Revenue',
     user: req.user,

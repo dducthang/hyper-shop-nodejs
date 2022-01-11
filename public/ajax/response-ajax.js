@@ -3,7 +3,6 @@ $('.response-form').on('submit', function (e) {
   const form = $(this);
   const url = form.attr('action');
   const data = form.serialize();
-  console.log(data);
   if (data !== 'response=') {
     $.ajax({
       type: 'POST',

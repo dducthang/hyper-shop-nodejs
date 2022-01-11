@@ -5,7 +5,6 @@ exports.getUsersApi = async (req, res, next) => {
   const isAdmin = req.query.isAdmin;
   const isLock = req.query.isLock;
   let users;
-  console.log("-----", isLock);
 
   if (isLock != undefined) {
     users = await UserService.getUsersApi({ isAdmin, isLock });
