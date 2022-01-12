@@ -139,6 +139,7 @@ exports.postAddProduct = (req, res, next) => {
           product: product,
           pageTitle: 'Add product',
           error: 'Type of image file is not appropriate',
+          user: req.user
         });
       } else {
         (product.image = '/img/' + req.file.originalname),
@@ -150,11 +151,8 @@ exports.postAddProduct = (req, res, next) => {
             .toFile('./public/img/' + req.file.originalname);
 
         ProductService.createProduct(product).then(result => {
-          res.status(200).render('shop/addProduct', {
-            pageTitle: 'Add product',
-            error: null,
-            product: null,
-          });
+          console.log('Created product');
+          res.redirect('addProduct');
         });
       }
     })
