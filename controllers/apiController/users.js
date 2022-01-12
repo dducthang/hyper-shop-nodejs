@@ -3,12 +3,13 @@ exports.getUsersApi = async (req, res, next) => {
   const ITEMS_PER_PAGE = 10;
   let page = req.query.page || 1;
   const isAdmin = req.query.isAdmin || false;
-  const isLock = req.query.isLock || false;
+  const isLock = req.query.isLock;
   let users;
-
   if (isLock != undefined) {
     users = await UserService.getUsersApi({ isAdmin, isLock });
-  } else users = await UserService.getUsersApi({ isAdmin });
+  } else {
+    users = await UserService.getUsersApi({ isAdmin });
+  }
 
   const usersCount = users.length;
 
