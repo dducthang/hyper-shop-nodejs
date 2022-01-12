@@ -1,4 +1,4 @@
-const url = "http://localhost:4000/api/order/change-status"
+const url = "/api/order/change-status"
 
 
 const xchangeStatusHandler = (e)=>{

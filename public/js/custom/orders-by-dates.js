@@ -1,6 +1,6 @@
 let dateChart = document.getElementById('dateChart').getContext('2d');
 
-const url = "http://localhost:4000/admins/get-revenue-dates";
+const url = "/admins/get-revenue-dates";
 
 const getDaysInWeek = (current) =>{
     var week= []; 
