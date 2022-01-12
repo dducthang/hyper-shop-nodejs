@@ -1,8 +1,8 @@
 const User = require("../user");
 const bcrypt = require("bcrypt");
 
-exports.getUser = async (filter) => {
-  return await User.findOne(filter);
+exports.getUser = (filter) => {
+  return User.findOne(filter);
 };
 
 exports.getUsers = (filter) => {

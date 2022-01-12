@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
 const User = require("../user");
 
-exports.getAdmins = async () => {
-  return await User.find({ isAdmin: true });
+exports.getAdmins = () => {
+  return User.find({ isAdmin: true });
 };
 
 exports.getAdmin = async (filter) => {

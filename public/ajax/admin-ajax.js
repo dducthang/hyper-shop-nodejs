@@ -14,7 +14,6 @@ $(".pages").on("click", ".page-link", function () {
     dataType: "json",
     success: function (data) {
       const { users, page, lastPage } = data;
-      console.log(data);
       //xử lí data gửi về
       let userList = "";
       let userBox;
