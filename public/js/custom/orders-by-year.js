@@ -1,4 +1,4 @@
-const urlYear = "http://localhost:4000/admins/get-revenue-year"
+const urlYear = "/admins/get-revenue-year"
 const loaderYear = document.querySelector('#loader-year');
 
 let yearChart = document.getElementById('yearChart').getContext('2d');

@@ -1,4 +1,4 @@
-const urlMonth = "http://localhost:4000/admins/get-revenue-month"
+const urlMonth = "/admins/get-revenue-month"
 const loaderMonth = document.querySelector('#loader-month');
 
 let monthChart = document.getElementById('lineChart').getContext('2d');
