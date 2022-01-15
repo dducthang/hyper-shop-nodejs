@@ -1,15 +1,5 @@
 const url = "/api/order/change-status"
 
-
-const xchangeStatusHandler = (e)=>{
-    let statusStr = e.currentTarget.id;
-    let parent = e.currentTarget.closest('.dropdown-menu');
-    const index = statusStr.indexOf('-');
-    const id = statusStr.substring(index+1);
-    const status = statusStr.substring(0,index);
-}
-
-
 const changeStatusHandler=async(e)=>{
     let statusStr = e.currentTarget.id;
     const index = statusStr.indexOf('-');
@@ -48,7 +38,7 @@ const changeStatusHandler=async(e)=>{
                     row.setAttribute('id',order._id);
                     row.innerHTML=`
                         <th scope="row">${order._id}</th>
-                        <td>${order.name}</td>
+                        <td>${order.user.email}</td>
                         <td>${order.phone}</td>
                         <td>${order.address}</td>
                         <td>
