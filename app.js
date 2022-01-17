@@ -22,6 +22,7 @@ const authRoutes = require("./routes/auth");
 const orderRoutes = require("./routes/order");
 const apiRoutes = require("./routes/api");
 const adminRoutes = require("./routes/admin");
+const errorRoutes = require("./routes/error");
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -58,6 +59,7 @@ app.use("/auth", authRoutes);
 app.use("/orders", checkAuthenticated, orderRoutes);
 app.use("/api", apiRoutes);
 app.use("/admins", checkAuthenticated, adminRoutes);
+app.use(errorRoutes);
 
 //server;
 app.listen(process.env.PORT || 4000, () => {
